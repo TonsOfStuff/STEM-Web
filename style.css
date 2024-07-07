@@ -1,0 +1,49 @@
+:root{
+    --headerHeight: 90px;
+}
+
+button{
+    border:rgba(255, 255, 255, 0)
+}
+
+button:hover {
+    color:rgba(0, 0, 0, 0.111)
+}
+
+body{
+    margin: 0px;
+}
+
+header {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0);
+    height: var(--headerHeight);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+
+/*Dropdown styles*/
+#dropdown{
+    display: flex;
+    flex-direction: column;
+}
+
+#dropdownButton{
+    height: 100%;
+}
+
+
+#dropdownContent {
+    display: none;
+    position: absolute;
+    width: -webkit-fill-available;
+    height: 150px;
+    padding-top: var(--headerHeight);
+}
+
+
+#dropdown:hover #dropdownContent{
+    display: grid; 
+    grid-template-rows: 1fr 1fr 1fr;
+}

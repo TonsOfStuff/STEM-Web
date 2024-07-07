@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>STEM Web</title>
+        <link href="style.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <script src = "script.js" async></script>
+        <header>
+            <div>Title</div>
+            <button class = "categoryButton" onclick = "getCategory('math')">Math</button>
+            <button class = "categoryButton" onclick = "getCategory('physics')">Physics</button>
+            <button class = "categoryButton" onclick = "getCategory('chemistry')">Chemistry</button>
+            <div id = "dropdown">
+                <button id = "dropdownButton">Other topics</button>
+                <div id = "dropdownContent">
+                    <button class = "dropdownItem">A</button>
+                    <button class = "dropdownItem">B</button>
+                    <button class = "dropdownItem">C</button>
+                </div>
+            </div>
+        </header>
+        
+
+        <div id = "main" style = "display: none;">
+            <div id = "questionBox"></div>
+            <form id = "form" onsubmit="return false">
+                <input type = "text" id = "answerBox" name = "answer">
+                <button id = "submit" name = "submit" onclick = "submitAnswer()">Submit</button>
+            </form>
+            <div id = "score"></div>
+        </div>
+
+        <button id = "startButton" style = "display: none;">Start Test</button>
+
+
+    </body>
+</html>
