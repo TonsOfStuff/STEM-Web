@@ -1,51 +1,88 @@
-:root{
+:root {
     --headerHeight: 90px;
 }
 
-button{
-    border:rgba(255, 255, 255, 0);
-    background-color: rgb(255, 255, 255);
+
+button {
+    border: none; 
+    background-color: #2A2B2E;
+    color: white;
+    cursor: pointer;
+    height: 40px;
+    font-family: 'Montserrat', sans-serif;
 }
 
 button:hover {
-    background-color:rgba(98, 98, 98, 0.111);
+    background-color: #1098F7;
 }
 
-body{
-    margin: 0px;
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #2A2B2E;
+    color: white;
 }
 
 header {
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0);
+    width: auto;
+    background-color: #2A2B2E;
     height: var(--headerHeight);
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(5, 1fr);
     gap: 5px;
+    align-items: center;
+    margin: 0 10px; 
+    border-bottom: 0.75px rgb(255, 255, 255) solid;
 }
 
-
-/*Dropdown styles*/
-#dropdown{
-    display: flex;
-    flex-direction: column;
+.categoryButton {
+    font-family: 'Montserrat', sans-serif;
+    color: white;
 }
 
-#dropdownButton{
+/* Dropdown styles */
+#dropdown {
+    position: relative;
+}
+
+#dropdownButton {
     height: 100%;
+    width: 100%;
+    background-color: inherit;
+    color: inherit;
+    border: none;
+    cursor: pointer; 
+    text-align: center;
 }
-
 
 #dropdownContent {
     display: none;
     position: absolute;
-    width: -webkit-fill-available;
-    height: 150px;
-    padding-top: var(--headerHeight);
+    top: 100%;
+    width: 100%;
+    color: #ffffff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.349);
+    z-index: 1;
+}
+
+#dropdown:hover #dropdownContent {
+    display: flex; 
+    flex-direction: column;
+}
+
+.dropdownItem {
+    transform: translateX(-20px);
+    transition: transform 0.3s ease-in-out;
+}
+
+#dropdown:hover .dropdownItem {
+    transform: translateX(0);
 }
 
 
-#dropdown:hover #dropdownContent{
-    display: grid; 
-    grid-template-rows: 1fr 1fr 1fr;
+
+
+/* Main Page */
+.main {
+    margin: 15px;
 }
