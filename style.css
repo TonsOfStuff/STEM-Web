@@ -6,6 +6,7 @@
 button {
     border: none; 
     background-color: #2A2B2E;
+    border-radius: 5px;
     color: white;
     cursor: pointer;
     height: 40px;
@@ -13,7 +14,7 @@ button {
 }
 
 button:hover {
-    background-color: #1098F7;
+    background: linear-gradient(90deg, rgba(16,152,247,1) 10%, rgba(0,212,255,1) 100%);
 }
 
 body {
@@ -43,6 +44,7 @@ header {
 /* Dropdown styles */
 #dropdown {
     position: relative;
+    height: 40px;
 }
 
 #dropdownButton {
@@ -83,6 +85,19 @@ header {
 
 
 /* Main Page */
-.main {
+#main {
     margin: 15px;
+}
+
+#startButton {
+    margin: 15px;
+}
+
+
+/*Input box*/
+#answerBox {
+    width: 50%;
+    height: 20px;
+    border: none;
+    border-radius: 10px;
 }
