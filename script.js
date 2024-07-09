@@ -19,7 +19,8 @@ const questionBox = document.getElementById("questionBox");
 const inputBox = document.getElementById("answerBox");
 const submitButton = document.getElementById("submit");
 const questionForm = document.getElementById("main");
-const startButton = document.getElementById("startButton")
+const startButton = document.getElementById("startButton");
+const rightOrWrongText = document.getElementById("rightOrWrongText");
 
 
 //Everything else
