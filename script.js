@@ -1,14 +1,29 @@
 const questionBank = `{
     "categories": {
         "physics": {
-            "What is the force of gravity in newtons?": "9.8"
+            "questions": {
+                "What is the force of gravity in newtons?": "9.8"
+            },
+            "about": {
+                "about": "This is about physics"
+            }
         },
         "math": {
-            "What is 1 + 1" : "2"
+            "questions": {
+                "What is 1 + 1" : "2"
+            },
+            "about": {
+                "about": "This is about math"
+            }     
         },
         "chemistry": {
-            "What is Na?": "Sodium",
-            "What does H2O2 decompose into?": "H20 + 02"
+            "questions": {
+                "What is Na?": "Sodium",
+                "What does H2O2 decompose into?": "H2O + O2"
+            },
+            "about": {
+                "about": "This is about chemistry"
+            }
         }
     }
 }`
@@ -19,13 +34,16 @@ const questionBox = document.getElementById("questionBox");
 const inputBox = document.getElementById("answerBox");
 const submitButton = document.getElementById("submit");
 const questionForm = document.getElementById("main");
+const questionContainer = document.getElementById("questionContainer");
 const startButton = document.getElementById("startButton");
 const rightOrWrongText = document.getElementById("rightOrWrongText");
+const aboutSection = document.getElementById("aboutSection");
 
 
 //Everything else
 const categories = JSON.parse(questionBank)["categories"];
 let chosenCategory = null;
+let chosenCategoryAbout = "Quiz website!";
 
 let chosenQuestion = null;
 let chosenAnswer = null;
@@ -45,13 +63,18 @@ function updateScore(){
 //Functions
 function getCategory(category){
     startButton.style.display = "block";
-    questionForm.style.display = "none";
+    questionContainer.style.display = "none";
+    rightOrWrongText.innerText = ""
+
     
     localStorage.clear();
     numOfQuestionsAnsweredCorrect = 0;
     updateScore();
 
-    chosenCategory = categories[category];
+    chosenCategory = categories[category]["questions"];
+    chosenCategoryAbout = categories[category]["about"]["about"];
+
+    aboutSection.innerText = chosenCategoryAbout;
     
     //Update score counter
     amountOfQuestions = Object.keys(chosenCategory).length;
@@ -92,10 +115,14 @@ function chooseQuestion(){
 function submitAnswer(){
     if (chosenAnswer.toLowerCase() === inputBox.value.toLowerCase()){
         numOfQuestionsAnsweredCorrect += 1;
+        rightOrWrongText.innerText = "Right"
+        rightOrWrongText.style.color = "#00d100"
         updateScore();
         chooseQuestion();
     }
     else{
+        rightOrWrongText.innerText = "Wrong"
+        rightOrWrongText.style.color = "red"
         chooseQuestion();
     }
 }
@@ -110,11 +137,15 @@ function resetCategory(){
             localStorage.setItem(Object.keys(chosenCategory)[i], Object.values(chosenCategory)[i])
         }
 
+        rightOrWrongText.innerText = "";
+
+
         numOfQuestionsAnsweredCorrect = 0;
         updateScore();
 
         submitButton.innerText = "Submit";
         submitButton.onclick = submitAnswer;
+        
 
         chooseQuestion();
     }
@@ -124,6 +155,6 @@ function resetCategory(){
 
 
 document.getElementById("startButton").addEventListener('click', function (){
-    questionForm.style.display = "block";
+    questionContainer.style.display = "block";
     startButton.style.display = "none";
 })
