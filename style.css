@@ -39,6 +39,11 @@ header {
 .categoryButton {
     font-family: 'Montserrat', sans-serif;
     color: white;
+    
+}
+.categoryButton:hover {
+    box-shadow: 0 0 60px 5px #2e57d3;
+    z-index: 1;
 }
 
 /* Dropdown styles */
@@ -57,6 +62,10 @@ header {
     text-align: center;
 }
 
+#dropdownButton:hover {
+    box-shadow: 0 0 60px 5px #2e57d3;
+}
+
 #dropdownContent {
     display: none;
     position: absolute;
@@ -65,6 +74,7 @@ header {
     color: #ffffff;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.349);
     z-index: 1;
+    border-radius: 5px;
 }
 
 #dropdown:hover #dropdownContent {
@@ -108,7 +118,7 @@ form {
     gap: 7.5px;
 }
 
-#form:hover #answerBox{
+#answerBox:focus{
     background-color: white;
 }
 
