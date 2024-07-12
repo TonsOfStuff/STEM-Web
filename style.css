@@ -42,10 +42,9 @@ header {
     
 }
 .categoryButton:hover {
-    box-shadow: 0 0 60px 5px #2e57d3;
+    box-shadow: 0 0 30px 1px #2e57d3;
     z-index: 1;
 }
-
 /* Dropdown styles */
 #dropdown {
     position: relative;
@@ -63,7 +62,7 @@ header {
 }
 
 #dropdownButton:hover {
-    box-shadow: 0 0 60px 5px #2e57d3;
+    box-shadow: 0 0 30px 1px #2e57d3;
 }
 
 #dropdownContent {
@@ -99,8 +98,25 @@ header {
     margin: 15px;
 }
 
+/* Start button stuff */
 #startButton {
     margin: 15px;
+}
+
+#startButtonBorder {
+    border: 1px #ffffff solid;
+    padding: 10px;
+
+    width: 50%;
+    height: 25vw;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#startButtonContainer{
+    margin: 30px 15px 0px 15px;
 }
 
 
@@ -110,6 +126,7 @@ header {
     border: 1px #ffffff solid;
     padding: 10px;
     width: 50%;
+    height: 25vw;
 }
 
 form {
@@ -145,7 +162,12 @@ form {
 #submit{
     width: 80px;
     height: 30px;
-    background: linear-gradient(90deg, rgba(16,152,247,1) 10%, rgba(0,212,255,1) 100%);
+    background: linear-gradient(90deg, rgba(16,152,247,1) 10%, rgb(82, 197, 255) 100%);
+}
+
+#submit:hover{
+    box-shadow: 0 0 20px 0.5px #2e57d3;
+    z-index: 1;
 }
 
 
