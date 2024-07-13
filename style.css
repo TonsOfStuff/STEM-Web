@@ -71,7 +71,8 @@ header {
     top: 100%;
     width: 100%;
     color: #ffffff;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.349);
+    box-shadow: 0 10px 16px rgba(0, 0, 0, 0.349);
+    background: #2e2f32;
     z-index: 1;
     border-radius: 5px;
 }
@@ -84,6 +85,7 @@ header {
 .dropdownItem {
     transform: translateX(-20px);
     transition: transform 0.3s ease-in-out;
+    background: #2e2f32;
 }
 
 #dropdown:hover .dropdownItem {

@@ -71,6 +71,9 @@ const aboutSection = document.getElementById("aboutSection");
 const categoryButtonA = document.getElementById("categoryButtonA");
 const categoryButtonB = document.getElementById("categoryButtonB");
 const categoryButtonC = document.getElementById("categoryButtonC");
+const categoryButtonD = document.getElementById("categoryButtonD");
+const categoryButtonE = document.getElementById("categoryButtonE");
+const categoryButtonF = document.getElementById("categoryButtonF");
 
 
 //Everything else
@@ -84,23 +87,34 @@ let chosenAnswer = null;
 let amountOfQuestions = null;
 let numOfQuestionsAnsweredCorrect = 0;
 
-const mostRecentStack = [];
+const mostRecentQueue = [];
 
 
 
 //On start update the buttons to match most recent clicks
 for (let i = 0; i < 6; i++){
-    mostRecentStack.push(Object.keys(categories)[i])
+    mostRecentQueue.push(Object.keys(categories)[i])
 }
 
+//I could add this into a loop but I don't feel like it rn
+function updateButtonForQueue(){
+    categoryButtonA.innerText = mostRecentQueue[0];
+    categoryButtonB.innerText = mostRecentQueue[1];
+    categoryButtonC.innerText = mostRecentQueue[2];
+    categoryButtonD.innerText = mostRecentQueue[3];
+    categoryButtonE.innerText = mostRecentQueue[4];
+    categoryButtonF.innerText = mostRecentQueue[5];
 
-categoryButtonA.innerText = mostRecentStack[3];
-categoryButtonB.innerText = mostRecentStack[4];
-categoryButtonC.innerText = mostRecentStack[5];
+    categoryButtonA.parentElement.onclick = function () { getCategory(mostRecentQueue[0]); };
+    categoryButtonB.parentElement.onclick = function () { getCategory(mostRecentQueue[1]); };
+    categoryButtonC.parentElement.onclick = function () { getCategory(mostRecentQueue[2]); };
+    categoryButtonD.parentElement.onclick = function () { getCategory(mostRecentQueue[3]); };
+    categoryButtonE.parentElement.onclick = function () { getCategory(mostRecentQueue[4]); };
+    categoryButtonF.parentElement.onclick = function () { getCategory(mostRecentQueue[5]); };
+}
 
-categoryButtonA.parentElement.onclick = function () { getCategory(mostRecentStack[3]); };
-categoryButtonB.parentElement.onclick = function () { getCategory(mostRecentStack[4]); };
-categoryButtonC.parentElement.onclick = function () { getCategory(mostRecentStack[5]); };
+updateButtonForQueue();
+
 
 
 
@@ -118,6 +132,13 @@ function getCategory(category){
     sessionStorage.clear();
     numOfQuestionsAnsweredCorrect = 0;
     updateScore();
+
+    let removedItem = mostRecentQueue.splice(mostRecentQueue.indexOf(category), 1);
+    if (removedItem == []){
+        mostRecentQueue.pop();
+    }
+    mostRecentQueue.unshift(category) //Adds to front of queue
+    updateButtonForQueue();
 
     chosenCategory = categories[category]["questions"];
     chosenCategoryAbout = categories[category]["about"]["about"];
