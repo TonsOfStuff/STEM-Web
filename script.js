@@ -67,6 +67,8 @@ const questionContainer = document.getElementById("questionContainer");
 const startButtonContainer = document.getElementById("startButtonContainer");
 const rightOrWrongText = document.getElementById("rightOrWrongText");
 const aboutSection = document.getElementById("aboutSection");
+const startButton = document.getElementById("startButton")
+
 
 const categoryButtonA = document.getElementById("categoryButtonA");
 const categoryButtonB = document.getElementById("categoryButtonB");
@@ -88,7 +90,6 @@ let amountOfQuestions = null;
 let numOfQuestionsAnsweredCorrect = 0;
 
 const mostRecentQueue = [];
-
 
 
 //On start update the buttons to match most recent clicks
@@ -222,8 +223,10 @@ function resetCategory(){
 
 }
 
-
-document.getElementById("startButton").addEventListener('click', function (){
-    questionContainer.style.display = "block";
-    startButtonContainer.style.display = "none";
-})
+if (startButton !== null){
+    startButton.addEventListener('click', function (){
+        questionContainer.style.display = "block";
+        startButtonContainer.style.display = "none";
+    })
+}
+    

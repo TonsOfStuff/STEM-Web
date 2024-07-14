@@ -172,7 +172,10 @@ form {
     z-index: 1;
 }
 
-
+/*Search options*/
+.optionClass {
+    font-size: 10px;
+}
 
 
 
