@@ -5,8 +5,9 @@ let possibleSubj = [];
 
 Object.keys(categories).forEach(element => {
     possibleSubj.push(element)
-    const mainDiv = document.getElementById("main");
+    const mainDiv = document.getElementById("searchMain");
     const originalDiv = document.getElementById("referenceDiv");
+
 
 
     const containerDiv = document.createElement("div");
