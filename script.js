@@ -78,6 +78,7 @@ const categoryButtonE = document.getElementById("categoryButtonE");
 const categoryButtonF = document.getElementById("categoryButtonF");
 
 
+
 //Everything else
 const categories = JSON.parse(questionBank)["categories"];
 let chosenCategory = null;
@@ -91,10 +92,18 @@ let numOfQuestionsAnsweredCorrect = 0;
 
 const mostRecentQueue = [];
 
+//Save category chosen from previous page
+let savedCategory = window.name;
+
 
 //On start update the buttons to match most recent clicks
 for (let i = 0; i < 6; i++){
     mostRecentQueue.push(Object.keys(categories)[i])
+}
+
+function redirectTest(type){
+    window.name = type;
+    window.location.replace("test.html");
 }
 
 //I could add this into a loop but I don't feel like it rn
@@ -106,12 +115,12 @@ function updateButtonForQueue(){
     categoryButtonE.innerText = mostRecentQueue[4];
     categoryButtonF.innerText = mostRecentQueue[5];
 
-    categoryButtonA.parentElement.onclick = function () { getCategory(mostRecentQueue[0]); };
-    categoryButtonB.parentElement.onclick = function () { getCategory(mostRecentQueue[1]); };
-    categoryButtonC.parentElement.onclick = function () { getCategory(mostRecentQueue[2]); };
-    categoryButtonD.parentElement.onclick = function () { getCategory(mostRecentQueue[3]); };
-    categoryButtonE.parentElement.onclick = function () { getCategory(mostRecentQueue[4]); };
-    categoryButtonF.parentElement.onclick = function () { getCategory(mostRecentQueue[5]); };
+    categoryButtonA.parentElement.onclick = function () { redirectTest(mostRecentQueue[0]); };
+    categoryButtonB.parentElement.onclick = function () { redirectTest(mostRecentQueue[1]); };
+    categoryButtonC.parentElement.onclick = function () { redirectTest(mostRecentQueue[2]); };
+    categoryButtonD.parentElement.onclick = function () { redirectTest(mostRecentQueue[3]); };
+    categoryButtonE.parentElement.onclick = function () { redirectTest(mostRecentQueue[4]); };
+    categoryButtonF.parentElement.onclick = function () { redirectTest(mostRecentQueue[5]); };
 }
 
 updateButtonForQueue();
@@ -125,8 +134,8 @@ function updateScore(){
 
 //Functions
 function getCategory(category){
-    startButtonContainer.style.display = "block";
-    questionContainer.style.display = "none";
+    //startButtonContainer.style.display = "block";
+    questionContainer.style.display = "block";
     rightOrWrongText.innerText = ""
 
     
@@ -223,10 +232,13 @@ function resetCategory(){
 
 }
 
+
 if (startButton !== null){
     startButton.addEventListener('click', function (){
         questionContainer.style.display = "block";
         startButtonContainer.style.display = "none";
+
+        getCategory(savedCategory)
     })
 }
     

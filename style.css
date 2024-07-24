@@ -13,6 +13,10 @@ button {
     font-family: 'Montserrat', sans-serif;
 }
 
+a{
+    justify-self: center;
+}
+
 button:hover {
     background: linear-gradient(90deg, rgba(16,152,247,1) 10%, rgba(0,212,255,1) 100%);
 }
