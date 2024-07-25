@@ -92,8 +92,12 @@ let numOfQuestionsAnsweredCorrect = 0;
 
 const mostRecentQueue = [];
 
+
 //Save category chosen from previous page
 let savedCategory = window.name;
+if (document.URL.includes("test.html") === false){
+    savedCategory = null;
+}
 
 
 //On start update the buttons to match most recent clicks
@@ -125,8 +129,10 @@ function updateButtonForQueue(){
 
 updateButtonForQueue();
 
-
-
+//Run at start of test.html
+if (savedCategory !== null){
+    getCategory(savedCategory);
+}
 
 function updateScore(){
     scoreUI.innerText = numOfQuestionsAnsweredCorrect + "/" + amountOfQuestions;
@@ -134,8 +140,6 @@ function updateScore(){
 
 //Functions
 function getCategory(category){
-    //startButtonContainer.style.display = "block";
-    questionContainer.style.display = "block";
     rightOrWrongText.innerText = ""
 
     
@@ -149,6 +153,7 @@ function getCategory(category){
     }
     mostRecentQueue.unshift(category) //Adds to front of queue
     updateButtonForQueue();
+
 
     chosenCategory = categories[category]["questions"];
     chosenCategoryAbout = categories[category]["about"]["about"];
@@ -237,8 +242,6 @@ if (startButton !== null){
     startButton.addEventListener('click', function (){
         questionContainer.style.display = "block";
         startButtonContainer.style.display = "none";
-
-        getCategory(savedCategory)
     })
 }
     
