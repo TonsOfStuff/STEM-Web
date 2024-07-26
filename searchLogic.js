@@ -16,6 +16,12 @@ Object.keys(categories).forEach(element => {
 
     containerDiv.appendChild(subjectTitle);
     mainDiv.insertBefore(containerDiv, originalDiv);
+
+    containerDiv.addEventListener("click", function(){
+        console.log(element)
+        window.name = element;
+        window.location.replace("test.html");
+    })
 });
 
 

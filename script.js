@@ -52,8 +52,26 @@ const questionBank = `{
             "about": {
                 "about": "This is about biology"
             }
-        }    
-        
+        },
+        "History": {
+            "questions": {
+                "When did WWII end?": "1945",
+                "What is the last name of the US' 16th president?": "Lincoln"
+            },
+            "about": {
+                "about": "This is about history"
+            }
+        },
+        "Spanish": {
+            "questions": {
+                "Que es rana en ingles?": "Frog",
+                "Que es sin embargo en ingles?": "However",
+                "Estar conjugated into the preterite yo form?": "Estuve"
+            },
+            "about": {
+                "about": "This is about spanish"
+            }
+        }
     }
 }`
 
