@@ -20,6 +20,10 @@ a{
     cursor: pointer;
 }
 
+a:hover{
+    text-decoration: underline;
+}
+
 button:hover {
     background: linear-gradient(90deg, rgba(16,152,247,1) 10%, rgba(0,212,255,1) 100%);
 }
@@ -261,6 +265,28 @@ form {
 @keyframes wobble {
     0% { transform: translateX(-100%); opacity: 0;}
     100% {transform: translateX(0%); opacity: 1;}
+}
+
+
+.scrollWatcher{
+    display: none;
+    height: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    background-color: #2c9cff;
+    width: 100%;
+    transform-origin: left;
+
+    scale: 0 1;
+    animation: scrollBarTop linear;
+    animation-timeline: scroll();
+    
+}
+
+@keyframes scrollBarTop{
+    to {scale: 1 1;}
 }
 
 @media only screen and (max-width: 600px){

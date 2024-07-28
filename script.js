@@ -96,7 +96,8 @@ const questionContainer = document.getElementById("questionContainer");
 const form = document.getElementById("form");
 const startButtonContainer = document.getElementById("startButtonContainer");
 const aboutSection = document.getElementById("aboutSection");
-const startButton = document.getElementById("startButton")
+const startButton = document.getElementById("startButton");
+const scrollBar = document.getElementsByClassName("scrollWatcher");
 
 
 const categoryButtonA = document.getElementById("categoryButtonA");
@@ -199,6 +200,7 @@ if (startButton !== null){
     startButton.addEventListener('click', function (){
         form.style.display = "block";
         startButtonContainer.style.display = "none";
+        //scrollBar.style.display = "block";
     })
 }
     
