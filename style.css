@@ -297,6 +297,7 @@ form {
 
     #submit{
         width: 15vw;
+        font-size: 3vw;
     }
 
     .questionBox {
