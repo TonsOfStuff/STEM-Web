@@ -15,6 +15,9 @@ button {
 
 a{
     justify-self: center;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 button:hover {
@@ -102,6 +105,23 @@ header {
 /* Main Page */
 #main {
     margin: 15px;
+    min-height: 350px;
+}
+
+footer {
+    height: 150px;
+    background: #1e2022;
+    padding: 30px;
+    display: grid;
+    margin-top: 100px;
+
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+}
+
+#footerItems{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
 }
 
 /* Start button stuff */
