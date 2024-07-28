@@ -76,14 +76,14 @@ const questionBank = `{
 }`
 
 //UI Elements
-const scoreUI = document.getElementById("score");
+const scoreUI = document.getElementById("scoreUI");
 const questionBox = document.getElementById("questionBox");
 const inputBox = document.getElementById("answerBox");
 const submitButton = document.getElementById("submit");
 const questionForm = document.getElementById("main");
 const questionContainer = document.getElementById("questionContainer");
+const form = document.getElementById("form");
 const startButtonContainer = document.getElementById("startButtonContainer");
-const rightOrWrongText = document.getElementById("rightOrWrongText");
 const aboutSection = document.getElementById("aboutSection");
 const startButton = document.getElementById("startButton")
 
@@ -101,6 +101,9 @@ const categoryButtonF = document.getElementById("categoryButtonF");
 const categories = JSON.parse(questionBank)["categories"];
 let chosenCategory = null;
 let chosenCategoryAbout = "Quiz website!";
+
+let questionsList = [];
+let answerList = [];
 
 let chosenQuestion = null;
 let chosenAnswer = null;
@@ -152,18 +155,12 @@ if (savedCategory !== null){
     getCategory(savedCategory);
 }
 
-function updateScore(){
-    scoreUI.innerText = numOfQuestionsAnsweredCorrect + "/" + amountOfQuestions;
-}
-
 //Functions
 function getCategory(category){
-    rightOrWrongText.innerText = ""
 
     
     sessionStorage.clear();
     numOfQuestionsAnsweredCorrect = 0;
-    updateScore();
 
     let removedItem = mostRecentQueue.splice(mostRecentQueue.indexOf(category), 1);
     if (removedItem == []){
@@ -180,85 +177,19 @@ function getCategory(category){
     
     //Update score counter
     amountOfQuestions = Object.keys(chosenCategory).length;
-    scoreUI.innerText = numOfQuestionsAnsweredCorrect + "/" + amountOfQuestions;
+    scoreUI.innerText = "0/" + amountOfQuestions.toString();
 
-
-    //Insert every question into the session storage
+    //Insert every question into question list ---------------- We can randomize questions here!
     for (let i = 0; i < amountOfQuestions; i++){
-        sessionStorage.setItem(Object.keys(chosenCategory)[i], Object.values(chosenCategory)[i])
+        questionsList.push(Object.keys(chosenCategory)[i]);
+        answerList.push(Object.values(chosenCategory)[i]);
     }
-
-    chooseQuestion();
-}
-
-function chooseQuestion(){
-    if (sessionStorage.length === 0){
-        submitButton.innerText = "Restart"
-        submitButton.onclick = resetCategory;
-        questionBox.innerText = "Out of questions!";
-    }
-    else{
-        inputBox.value = null;
-        const randomQuestionNum = Math.floor(Math.random() * Object.keys(sessionStorage).length);
-        chosenQuestion = Object.keys(sessionStorage)[randomQuestionNum];
-        chosenAnswer = Object.values(sessionStorage)[randomQuestionNum];
-        
-        //Output question onto screen
-        questionBox.innerText = chosenQuestion;
-    
-        //Remove from session storage
-        sessionStorage.removeItem(chosenQuestion)
-    }
-    
-
-}
-
-
-function submitAnswer(){
-    if (chosenAnswer.toLowerCase() === inputBox.value.toLowerCase()){
-        numOfQuestionsAnsweredCorrect += 1;
-        rightOrWrongText.innerText = "Right"
-        rightOrWrongText.style.color = "#00d100"
-        updateScore();
-        chooseQuestion();
-    }
-    else{
-        rightOrWrongText.innerText = "Wrong"
-        rightOrWrongText.style.color = "red"
-        chooseQuestion();
-    }
-}
-
-
-
-
-function resetCategory(){
-    //Reset session once its on the last question
-    if (sessionStorage.length === 0){
-        for (let i = 0; i < amountOfQuestions; i++){
-            sessionStorage.setItem(Object.keys(chosenCategory)[i], Object.values(chosenCategory)[i])
-        }
-
-        rightOrWrongText.innerText = "";
-
-
-        numOfQuestionsAnsweredCorrect = 0;
-        updateScore();
-
-        submitButton.innerText = "Submit";
-        submitButton.onclick = submitAnswer;
-        
-
-        chooseQuestion();
-    }
-    
-
 }
 
 
 if (startButton !== null){
     startButton.addEventListener('click', function (){
-        questionContainer.style.display = "block";
+        form.style.display = "block";
         startButtonContainer.style.display = "none";
     })
 }

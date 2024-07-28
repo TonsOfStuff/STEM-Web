@@ -127,30 +127,34 @@ header {
 
 
 /*Question Container*/
-#questionContainer{
+.questionContainer{
     margin-top: 30px;
+    margin-bottom: 10px;
     border: 1px #ffffff solid;
     padding: 10px;
-    width: 50%;
+    width: 100%;
     height: 25vw;
 }
 
 form {
     padding: 10px 0px;
-    display: flex;
-    gap: 7.5px;
+    margin-left: 25%;
+    margin-right: 25%;
 }
 
-#answerBox:focus{
+.answerBox:focus{
     background-color: white;
 }
 
-#rightOrWrongText{
+.rightOrWrongText{
     height: 29.33px;
 }
 
+#scoreUI{
+    margin-bottom: 10px;
+}
 
-#answerBox {
+.answerBox {
     width: 75%;
     height: 28px;
     border: none;
@@ -163,6 +167,9 @@ form {
     outline: none;
     transition: all 0.3s ease-in;
     background-color: #d2d2d2;
+
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 #submit{
