@@ -1,9 +1,10 @@
 let questionsAnsweredCorrect = 0;
+let previousAnsweredCorrect = 0;
 
 const filler = document.getElementById("filler");
 
 function updateScoreUI(){
-    scoreUI.innerText = questionsAnsweredCorrect.toString() + "/" + amountOfQuestions.toString();
+    scoreUI.innerText = (questionsAnsweredCorrect - previousAnsweredCorrect).toString() + "/" + amountOfQuestions.toString();
 }
 
 questionsList.forEach(element => {
@@ -36,9 +37,9 @@ questionsList.forEach(element => {
     form.insertBefore(questionCon, filler);
 });
 
-const allAnswered = document.getElementsByClassName("answerBox");
-const allRightOrWrongText = document.getElementsByClassName("rightOrWrongText");
-console.log(allRightOrWrongText);
+const allQuestionCon = document.querySelectorAll(".questionContainer");
+const allAnswered = document.querySelectorAll(".answerBox");
+const allRightOrWrongText = document.querySelectorAll(".rightOrWrongText");
 
 function checkAnswer(){
 
@@ -55,4 +56,18 @@ function checkAnswer(){
             allRightOrWrongText[i].style.color = "red"
         }
     }
+    previousAnsweredCorrect = questionsAnsweredCorrect;
 }
+
+
+//Scroll animations
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        console.log(entry);
+        if (entry.isIntersecting) {
+            entry.target.classList.add("shownQuestion");
+        }
+    })
+});
+
+allQuestionCon.forEach((element) => observer.observe(element));

@@ -47,7 +47,18 @@ const questionBank = `{
             "questions": {
                 "What is another word for body cells?": "Somatic cells",
                 "What kingdom do plants belong to?": "Plantae",
-                "What kingdom do animals belong to?": "Animalia"
+                "What kingdom do animals belong to?": "Animalia",
+                "What is the jaw bone's name?": "Mandible",
+                "How many chromosomes in a human cell?": "46",
+                "True or false: Viruses are living beings": "False",
+                "What are the finger/toe bones called?": "Phalanges",
+                "What helps Oxygen stick to blood?": "Hemoglobin",
+                "Is DNA positive or negatively charged?": "Negatively",
+                "How many bones are in the human body?": "206",
+                "How many cells are produced from meiosis?": "4",
+                "What is the method called where bacteria reproduce by translating DNA from pilli?": "Conjugation",
+                "What is the phase in mitosis where chromosomes line up on the equator of the cell?": "Metaphase"
+
             },
             "about": {
                 "about": "This is about biology"
@@ -157,9 +168,6 @@ if (savedCategory !== null){
 
 //Functions
 function getCategory(category){
-
-    
-    sessionStorage.clear();
     numOfQuestionsAnsweredCorrect = 0;
 
     let removedItem = mostRecentQueue.splice(mostRecentQueue.indexOf(category), 1);
