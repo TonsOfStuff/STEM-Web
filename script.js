@@ -10,7 +10,8 @@ const questionBank = `{
         },
         "Math": {
             "questions": {
-                "What is 1 + 1" : "2"
+                "What is 1 + 1" : "2",
+                "What is 5 * 2" : [["3", "10", "4", "7"], "10"]
             },
             "about": {
                 "about": "This is about math"

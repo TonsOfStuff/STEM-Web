@@ -262,6 +262,34 @@ form {
     transform: translateY(67px);
 }
 
+.selectorContainer{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: grid;
+    gap: 10px;
+
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.multipleChoiceOption{
+    height: 4vw;
+    font-size: 20px;
+    background-color: #2c9cff;
+    
+    transition: scale 0.4s ease-in-out, background-color 0.5s;
+
+    text-align: center;
+    align-content: center;
+}
+
+.multipleChoiceSelected{
+    background-color: #1c75c4;
+    box-shadow: 5px 5px rgb(31, 31, 31);
+    scale: 0.96;
+}
+
+
 @keyframes wobble {
     0% { transform: translateX(-100%); opacity: 0;}
     100% {transform: translateX(0%); opacity: 1;}
@@ -289,11 +317,15 @@ form {
     to {scale: 1 1;}
 }
 
+
 @media only screen and (max-width: 600px){
     :root {
         --headerHeight: 20vw;
     }
 
+    .multipleChoiceOption{
+        font-size: 2vw;
+    }
 
     #submit{
         width: 15vw;
