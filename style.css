@@ -276,6 +276,7 @@ form {
     height: 4vw;
     font-size: 20px;
     background-color: #2c9cff;
+    border-radius: 5px;
     
     transition: scale 0.4s ease-in-out, background-color 0.5s;
 
