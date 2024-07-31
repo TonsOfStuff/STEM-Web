@@ -107,6 +107,11 @@ header {
 
 
 /* Main Page */
+#aboutSection{
+    white-space: pre-line;
+}
+
+
 #main {
     margin: 15px;
     min-height: 350px;
@@ -211,7 +216,7 @@ form {
 #submit{
     width: 80px;
     height: 30px;
-    background: linear-gradient(90deg, rgba(16,152,247,1) 10%, rgb(82, 197, 255) 100%);
+    background: #2c9cff;
 }
 
 #submit:hover{
@@ -277,6 +282,7 @@ form {
     font-size: 20px;
     background-color: #2c9cff;
     border-radius: 5px;
+    box-shadow: 5px 5px rgb(27, 27, 27);
     
     transition: scale 0.4s ease-in-out, background-color 0.5s;
 
@@ -285,8 +291,8 @@ form {
 }
 
 .multipleChoiceSelected{
-    background-color: #1c75c4;
-    box-shadow: 5px 5px rgb(31, 31, 31);
+    background-color: #18609f;
+    
     scale: 0.96;
 }
 
@@ -369,6 +375,15 @@ form {
     header {
         display: grid;
         grid-template-columns: 2fr 1fr;
+    }
+    
+    form {
+        margin-left: 0%;
+        margin-right: 0%;
+    }
+
+    footer {
+        font-size: 13px;
     }
     
 }

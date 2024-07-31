@@ -28,6 +28,7 @@ questionsList.forEach(element => {
         //Make selectContainer in the outer scope
         const selectContainer = document.createElement("div");
         selectContainer.className = "selectorContainer"
+        shuffle(answerList[counter][0]);
 
         for (let i = 0; i < answerList[counter][0].length; i++){
             const optionClick = document.createElement("div");
@@ -141,3 +142,21 @@ const observer = new IntersectionObserver((entries) => {
 });
 
 allQuestionCon.forEach((element) => observer.observe(element));
+
+
+//Stolen code for shuffling list (Fisher-Yates Shuffle Algorithm)
+function shuffle(array) {
+    let currentIndex = array.length;
+  
+    // While there remain elements to shuffle...
+    while (currentIndex != 0) {
+  
+      // Pick a remaining element...
+      let randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+  }

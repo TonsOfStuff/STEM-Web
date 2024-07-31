@@ -20,7 +20,7 @@ const questionBank = `{
         "Chemistry": {
             "questions": {
                 "What is Na?": "Sodium",
-                "What does H2O2 decompose into?": "H2O + O2"
+                "What does H2O2 decompose into?": [["H2O + O2", "H2O", "O2", "H + O2"], "H2O + O2"]
             },
             "about": {
                 "about": "This is about chemistry"
@@ -46,7 +46,7 @@ const questionBank = `{
         },
         "Biology": {
             "questions": {
-                "What is another word for body cells?": "Somatic cells",
+                "What is another word for body cells?": [["Somatic Cells", "Gametic Cells", "Skin Cells", "Human cells"], "Somatic Cells"],
                 "What kingdom do plants belong to?": "Plantae",
                 "What kingdom do animals belong to?": "Animalia",
                 "What is the jaw bone's name?": "Mandible",
