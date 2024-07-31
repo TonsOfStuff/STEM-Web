@@ -6,7 +6,7 @@ const filler = document.getElementById("filler");
 let chosenMC = null;
 
 function updateScoreUI(){
-    scoreUI.innerText = (questionsAnsweredCorrect - previousAnsweredCorrect).toString() + "/" + amountOfQuestions.toString();
+    scoreUI.innerText = questionsAnsweredCorrect.toString() + "/" + amountOfQuestions.toString();
 }
 
 let counter = 0;
@@ -96,38 +96,38 @@ const allAnswered = document.querySelectorAll(".answerBox, .selectorContainer");
 const allRightOrWrongText = document.querySelectorAll(".rightOrWrongText");
 
 function checkAnswer(){
+    questionsAnsweredCorrect = 0;
+
     for (let i = 0; i < allAnswered.length; i++){
         if (typeof(answerList[i]) === "object"){
             if (chosenMC !== null){ //Checking if nothing has been selected
                 if (chosenMC.innerText === answerList[i][1]){
                     //Correct option for MC Question
-                    allRightOrWrongText[i].innerText = "Right"
+                    allRightOrWrongText[i].innerText = "Correct"
                     allRightOrWrongText[i].style.color = "#00d100"
                     questionsAnsweredCorrect += 1;
-                    updateScoreUI();
                 } else { //Wrong answer
-                    allRightOrWrongText[i].innerText = "Wrong"
+                    allRightOrWrongText[i].innerText = "Incorrect"
                     allRightOrWrongText[i].style.color = "red"
                 }
             } else { //Nothings been selected
-                allRightOrWrongText[i].innerText = "Wrong"
+                allRightOrWrongText[i].innerText = "Incorrect"
                 allRightOrWrongText[i].style.color = "red"
             }
         } else {
             if (allAnswered[i].value.toLowerCase() === answerList[i].toLowerCase()){
-                allRightOrWrongText[i].innerText = "Right"
+                allRightOrWrongText[i].innerText = "Correct"
                 allRightOrWrongText[i].style.color = "#00d100"
                 questionsAnsweredCorrect += 1;
-                updateScoreUI();
     
             }else{
-                allRightOrWrongText[i].innerText = "Wrong"
+                allRightOrWrongText[i].innerText = "Incorrect"
                 allRightOrWrongText[i].style.color = "red"
             }
         }
         
     }
-    previousAnsweredCorrect = questionsAnsweredCorrect;
+    updateScoreUI();
 }
 
 
