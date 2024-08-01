@@ -136,22 +136,37 @@ footer {
 /* Start button stuff */
 #startButton {
     margin: 15px;
+    width: fit-content;
+    justify-self: center;
 }
 
 #startButtonBorder {
     border: 1px #ffffff solid;
     padding: 10px;
 
-    width: 50%;
     height: 25vw;
 
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 2fr 1fr;
     align-items: center;
-    justify-content: center;
 }
 
 #startButtonContainer{
     margin: 30px 15px 0px 15px;
+}
+
+#optionsForm{
+    margin-left: 0%;
+    margin-right: 0%;
+    padding: 0px 0px;
+    height: 100%;
+
+    border-bottom: #d2d2d2 1px solid;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
 }
 
 .questionBox {

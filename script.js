@@ -99,6 +99,7 @@ const startButtonContainer = document.getElementById("startButtonContainer");
 const aboutSection = document.getElementById("aboutSection");
 const startButton = document.getElementById("startButton");
 const scrollBar = document.getElementsByClassName("scrollWatcher");
+const selectNumOfQuestions = document.getElementById("selectNumOfQuestions");
 
 
 const categoryButtonA = document.getElementById("categoryButtonA");
@@ -123,6 +124,8 @@ let chosenAnswer = null;
 
 let amountOfQuestions = null;
 let numOfQuestionsAnsweredCorrect = 0;
+
+let numOfQuestions = 0;
 
 const mostRecentQueue = [];
 
@@ -184,12 +187,19 @@ function getCategory(category){
     chosenCategoryAbout = categories[category]["about"]["about"];
 
     aboutSection.innerText = chosenCategoryAbout;
+}
+
+function getQuestions(){
+    //Update score counter by factoring in user input
+    if (numOfQuestions <= 0 || numOfQuestions === null || numOfQuestions > Object.keys(chosenCategory).length){
+        amountOfQuestions = Object.keys(chosenCategory).length;
+    }else{
+        amountOfQuestions = numOfQuestions;
+    }
     
-    //Update score counter
-    amountOfQuestions = Object.keys(chosenCategory).length;
     scoreUI.innerText = "0/" + amountOfQuestions.toString();
 
-    //Insert every question into question list ---------------- We can randomize questions here!
+    //Insert every question into question list  ------------- Randomize questions here
     for (let i = 0; i < amountOfQuestions; i++){
         questionsList.push(Object.keys(chosenCategory)[i]);
         answerList.push(Object.values(chosenCategory)[i]);
@@ -202,6 +212,9 @@ if (startButton !== null){
         form.style.display = "block";
         startButtonContainer.style.display = "none";
         //scrollBar.style.display = "block";
+        numOfQuestions = selectNumOfQuestions.value;
+        getQuestions();
+        createQuestions();
     })
 }
     
