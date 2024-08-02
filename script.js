@@ -199,10 +199,16 @@ function getQuestions(){
     
     scoreUI.innerText = "0/" + amountOfQuestions.toString();
 
+    let allPossibleQuestions = Object.keys(chosenCategory)
+    let allPossibleAnswers = Object.values(chosenCategory)
+    shuffle(allPossibleQuestions)
+    shuffle(allPossibleAnswers)
+    
+
     //Insert every question into question list  ------------- Randomize questions here
     for (let i = 0; i < amountOfQuestions; i++){
-        questionsList.push(Object.keys(chosenCategory)[i]);
-        answerList.push(Object.values(chosenCategory)[i]);
+        questionsList.push(allPossibleQuestions[i]);
+        answerList.push(allPossibleAnswers[i]);
     }
 }
 
