@@ -251,7 +251,7 @@ form {
 }
 
 #searchBar{
-    margin: 15px 40px;
+    margin: 30px 40px 15px 40px;
 }
 
 #searchBarInput{
@@ -272,7 +272,7 @@ form {
     background-size: 25px;
 }
 
-input::-webkit-search-cancel-button{
+input::-webkit-search-cancel-button::-webkit-search-decoration{
     display: none;
 }
 
