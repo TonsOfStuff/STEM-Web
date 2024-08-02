@@ -31,7 +31,7 @@ searchBar.addEventListener("input", function () {
     let searchingForText = searchBar.value;
     for (let i = 0; i < mainDiv.childElementCount; i++){
         if (mainDiv.children[i].textContent.toLowerCase().includes(searchingForText.toLowerCase())){
-            mainDiv.children[i].style.display = "block";
+            mainDiv.children[i].style.display = "grid";
         }else{
             mainDiv.children[i].style.display = "none";
         }
