@@ -244,7 +244,7 @@ form {
     margin: 15px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto;
+    grid-auto-rows: 150px;
     gap: 20px;
 
     min-height: 350px;
@@ -402,7 +402,7 @@ input[type="search"]{
         margin: 15px;
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: auto;
+        grid-auto-rows: 120px;
         gap: 20px
     }
 
