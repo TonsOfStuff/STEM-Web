@@ -272,8 +272,12 @@ form {
     background-size: 25px;
 }
 
-input::-webkit-search-cancel-button::-webkit-search-decoration{
+input::-webkit-search-cancel-button{
     display: none;
+}
+
+input[type="search"]{
+    -webkit-appearance: none;
 }
 
 .optionClass {
