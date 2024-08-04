@@ -109,6 +109,7 @@ header {
 /* Main Page */
 #aboutSection{
     white-space: pre-line;
+    margin-bottom: 100px;
 }
 
 
@@ -141,11 +142,6 @@ footer {
 }
 
 #startButtonBorder {
-    border: 1px #ffffff solid;
-    padding: 10px;
-
-    height: 25vw;
-
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 2fr 1fr;
@@ -160,20 +156,43 @@ footer {
     margin-left: 0%;
     margin-right: 0%;
     padding: 0px 0px;
+    width: 100%;
     height: 100%;
 
     border-bottom: #d2d2d2 1px solid;
-
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    justify-self: center;
 }
 
 .questionBox {
     font-size: 20px;
 }
 
+#selectNumbersOfQuestionsContainer{
+    margin: 10px;
+    text-align: center;
+}
 
+#selectNumOfQuestions{
+    margin: 5px;
+    color: #ffffff;
+    background:#1e2022;
+    outline: none;
+    border-radius: 20px;
+    border: none;
+    padding: 10px;
+    height: 10px;
+
+    font-family: 'Montserrat', sans-serif;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
 /*Question Container*/
 .questionContainer{
     margin-top: 30px;
@@ -320,6 +339,8 @@ input[type="search"]{
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
 }
+
+
 
 .multipleChoiceOption{
     height: 4vw;
