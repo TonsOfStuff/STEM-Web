@@ -153,18 +153,37 @@ function checkAnswer(){
 
 
 //Stolen code for shuffling list (Fisher-Yates Shuffle Algorithm)
-function shuffle(array) {
-    let currentIndex = array.length;
+function shuffle(array, array2 = null) {
+    if (array2 === null){
+        let currentIndex = array.length;
   
-    // While there remain elements to shuffle...
-    while (currentIndex != 0) {
+        // While there remain elements to shuffle...
+        while (currentIndex != 0) {
+    
+        // Pick a remaining element...
+        let randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+    
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+        }
+    }else{
+        let currentIndex = array.length;
   
-      // Pick a remaining element...
-      let randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-  
-      // And swap it with the current element.
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex], array[currentIndex]];
+        // While there remain elements to shuffle...
+        while (currentIndex != 0) {
+    
+        // Pick a remaining element...
+        let randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+    
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+        [array2[currentIndex], array2[randomIndex]] = [
+            array2[randomIndex], array2[currentIndex]];
+        }
     }
-  }
+    
+}

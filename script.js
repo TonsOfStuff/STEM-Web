@@ -6,6 +6,9 @@ const questionBank = `{
             },
             "about": {
                 "about": "This is about physics"
+            },
+            "links": {
+                "link": "https://www.crackap.com/ap/physics-1/index.html" 
             }
         },
         "Math": {
@@ -83,6 +86,14 @@ const questionBank = `{
             "about": {
                 "about": "This is about spanish"
             }
+        },
+        "Kinematics": {
+            "questions": {
+                "An object free falls a distance of 10 meters from rest in a given amount of time. How far will the same object fall from rest in twice the elapsed time?": [["40m", "35m", "30m", "20m"], "40m"]
+            },
+            "about": {
+                "about": "A subsection of Physics called Kinematics."
+            }
         }
     }
 }`
@@ -118,6 +129,7 @@ let chosenCategoryAbout = "Quiz website!";
 
 let questionsList = [];
 let answerList = [];
+let linkList = [];
 
 let chosenQuestion = null;
 let chosenAnswer = null;
@@ -201,8 +213,7 @@ function getQuestions(){
 
     let allPossibleQuestions = Object.keys(chosenCategory)
     let allPossibleAnswers = Object.values(chosenCategory)
-    shuffle(allPossibleQuestions)
-    shuffle(allPossibleAnswers)
+    shuffle(allPossibleAnswers, allPossibleQuestions)
     
 
     //Insert every question into question list  ------------- Randomize questions here
