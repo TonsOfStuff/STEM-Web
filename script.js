@@ -89,10 +89,16 @@ const questionBank = `{
         },
         "Kinematics": {
             "questions": {
-                "An object free falls a distance of 10 meters from rest in a given amount of time. How far will the same object fall from rest in twice the elapsed time?": [["40m", "35m", "30m", "20m"], "40m"]
+                "An object free falls a distance of 10 meters from rest in a given amount of time. How far will the same object fall from rest in twice the elapsed time?": [["40m", "35m", "30m", "20m"], "40m"],
+                "A boy drops a stone from a cliff and counts 3.0 s until he sees the stone hit the base. How high is the cliff in meters?": "45m",
+                "Two vectors, A and B, have the same magnitude of 5, but vector A points north whereas vector B points east. What is the sum, A+B?": [["7.07", "5.60", "3.26", "7.91"], "7.07"],
+                "If F1 = 20k, F2 = -5i + 10k, and F3 = 10i +15j, what is the sum of F1 + F2 + F3?": [["5i + 15j + 30k", "5k + 5i + 20j", "5i + 10k + 30j", "5j + 15i + 30k"], "5i + 15j + 30k"],
+                "A baseball is thrown straight upward. What is the ball's velocity at its highest point?": [["0m/s", "3m/s", "Cannot determine", "2m/s"], "0m/s"],
+                "How long would it take a car, starting from rest and accelerating uniformly in a straight line at 5 m/s^2, to cover a distance of 200m?": [["8.94s", "8.23s", "7.32s", "17.88s"], "8.94s"],
+                "A rock is dropped off a cliff and strikes the ground with an impact velocity of 30 m/s. How high was the cliff?": [["45m", "32m", "40m", "35m"], "45m"]
             },
             "about": {
-                "about": "A subsection of Physics called Kinematics."
+                "about": "A subsection of Physics called Kinematics. PS. Use 10 m/s^2"
             }
         }
     }
