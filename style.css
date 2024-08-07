@@ -36,7 +36,10 @@ body{
 }
 
 #mainBody{
-    
+    background-image: url(svg/background.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
 }
 
 header {
@@ -143,7 +146,7 @@ section{
 }
 
 .middleSection{
-    background-color: rgba(0, 0, 0, 0.255);
+    background-color: rgba(0, 0, 0, 0.75);
     display: grid;
     grid-template-rows: 1fr 2fr;
     height: 60vh;
@@ -179,7 +182,7 @@ section{
 
 footer {
     height: 150px;
-    background: #1e2022;
+    background: #1e2022bd;
     padding: 30px;
     display: grid;
     margin-top: 100px;

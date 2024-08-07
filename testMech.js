@@ -40,12 +40,13 @@ function createQuestions(){
                 optionClick.addEventListener('click', function () {
                     optionClick.classList.add("multipleChoiceSelected");
                     try{
-                        chosenMC.classList.remove("multipleChoiceSelected")
+                        if (chosenMC !== optionClick){
+                            chosenMC.classList.remove("multipleChoiceSelected")
+                        }
                     }catch{
                         
                     }
                     chosenMC = optionClick;
-    
                 })
     
     
