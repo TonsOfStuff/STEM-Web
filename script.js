@@ -98,7 +98,7 @@ const questionBank = `{
                 "A rock is dropped off a cliff and strikes the ground with an impact velocity of 30 m/s. How high was the cliff?": [["45m", "32m", "40m", "35m"], "45m"]
             },
             "about": {
-                "about": "A subsection of Physics called Kinematics. PS. Use 10 m/s^2"
+                "about": "A subsection of Physics called Kinematics. PS. G = 10 m/s^2"
             }
         }
     }
@@ -241,3 +241,7 @@ if (startButton !== null){
     })
 }
     
+function nonEventListenerTest(element){
+    window.name = element;
+    window.location.replace("test.html");
+}

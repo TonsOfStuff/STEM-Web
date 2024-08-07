@@ -20,7 +20,6 @@ Object.keys(categories).forEach(element => {
     mainDiv.insertBefore(containerDiv, originalDiv);
 
     containerDiv.addEventListener("click", function(){
-        console.log(element)
         window.name = element;
         window.location.replace("test.html");
     })

@@ -9,10 +9,10 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     </head>
-    <body>
+    <body id = "mainBody">
         <script src = "script.js" async></script>
         <header>
-            <div><a href="index.html" style="text-decoration: none; color: white; font-size: 25px;">StudySesh</a></div>
+            <div><a href="index.html" style="text-decoration: none; color: white; font-size: 30px; padding-left: 10px;">StudySesh</a></div>
             <button class = "categoryButton"><div id = "categoryButtonA">Math</div></button>
             <button class = "categoryButton"><div id = "categoryButtonB">Physics</div></button>
             <button class = "categoryButton"><div id = "categoryButtonC">Chemistry</div></button>
@@ -29,11 +29,24 @@
 
         <div id = "main">
             <div id = "aboutSection">
-                Quiz website! <br><br><br>
-                Created to help students who need review or understanding of a general topic. <br>
-                Questions range from general knowledge to specific details. <br>
-                There are many topics to choose from! <br>
-                Please support!
+                <section class = "section1">
+                    <div class = "info1">
+                        <h1>A website about random tests that may or may not help you study! <br>
+                        Created to assist in a variety of topics</h1>
+                    </div>
+                    <img src = "https://www.freecodecamp.org/news/content/images/size/w2000/2021/06/w-qjCHPZbeXCQ-unsplash.jpg" alt = "N/A" class = "image1">
+                </section>
+                <section class = "middleSection">
+                    <div style = "padding: 50px; justify-self: center; font-size: 25px;">Some topics:</div>
+                    <div id = "optionClassHome">
+                        <div class = "optionClass" onclick="nonEventListenerTest('Math')">Math</div>
+                        <div class = "optionClass" onclick="nonEventListenerTest('Physics')">Physics</div>
+                        <div class = "optionClass" id = "lastOptionClassOnHome" onclick="nonEventListenerTest('Chemistry')">Chemistry</div>
+                    </div>
+                </section>
+                <section class = "section3">
+                    <h1>Come another time :)</h1>
+                </section>
             </div>
             
         </div>
