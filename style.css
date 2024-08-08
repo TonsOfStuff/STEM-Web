@@ -462,7 +462,6 @@ input[type="search"]{
 
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 5fr;
 
     background-image: url(svg/wave.svg);
     background-position: bottom;
@@ -471,13 +470,14 @@ input[type="search"]{
 }
 
 .aboutUsTitle{
-    font-size: 3vw;
+    font-size: 50px;
     justify-self: center;
     margin-top: 20px;
+    margin-bottom: 50px;
 }
 
 .aboutUsCard{
-    height: 80vh;
+    height: fit-content;
     width: 60vw;
     background-color: #242426;
     justify-self: center;
