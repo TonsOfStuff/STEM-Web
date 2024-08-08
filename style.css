@@ -456,6 +456,39 @@ input[type="search"]{
 }
 
 
+/*About Us*/
+#aboutUsMain{
+    padding: 15px;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 5fr;
+
+    background-image: url(svg/wave.svg);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.aboutUsTitle{
+    font-size: 3vw;
+    justify-self: center;
+    margin-top: 20px;
+}
+
+.aboutUsCard{
+    height: 80vh;
+    width: 60vw;
+    background-color: #242426;
+    justify-self: center;
+
+    padding: 50px;
+
+    border-radius: 30px;
+    box-shadow: 0 0 50px -6px #000000;
+}
+
+
 @media only screen and (max-width: 600px){
     :root {
         --headerHeight: 20vw;
