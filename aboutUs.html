@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>About Us</title>
+        <link href="style.css" rel="stylesheet" type="text/css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <script src = "script.js" async></script>
+        <style>
+            header::after{
+                display: none;
+            }
+            header{
+                position: relative;
+                box-shadow: 0 0 60px 0px black;
+            }
+        </style>
+
+        <header>
+            <div><a href="index.html" style="text-decoration: none; color: white; font-size: 30px; padding-left: 10px;">StudySesh</a></div>
+            <button class = "categoryButton"><div id = "categoryButtonA">Math</div></button>
+            <button class = "categoryButton"><div id = "categoryButtonB">Physics</div></button>
+            <button class = "categoryButton"><div id = "categoryButtonC">Chemistry</div></button>
+            <div id = "dropdown">
+                <button id = "dropdownButton"><a href = "search.html" style = "color:white; text-decoration: none;">All topics</a></button>
+                <div id = "dropdownContent">
+                    <button class = "dropdownItem"><div id = "categoryButtonD">A</div></button>
+                    <button class = "dropdownItem"><div id = "categoryButtonE">B</div></button>
+                    <button class = "dropdownItem"><div id = "categoryButtonF">C</div></button>
+                </div>
+            </div>
+        </header>
+
+
+
+
+        <main id = "aboutUsMain">
+            <div class = "aboutUsTitle">About Us</div>
+            <div class = "aboutUsCard">
+                We do stuff
+            </div>
+        </main>
+
+        <footer>
+            <div>A website about random tests that may or may not help you study! <br><br> <span style="font-size: 12px;">jtons2008@gmail.com</span></div>
+            <div id = "footerItems">
+                <div><a href = "index.html">Home</a></div>
+                <div><a href = "search.html">All Topics</a></div>
+                <div><a href = "aboutUs.html">About Us</a></div>
+            </div>
+            
+        </footer>
+    </body>
+</html>
