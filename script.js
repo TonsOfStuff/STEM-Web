@@ -93,9 +93,9 @@ const questionBank = `{
                 "A baseball is thrown straight upward. What is the ball's velocity at its highest point?": [["0m/s", "3m/s", "Cannot determine", "2m/s"], "0m/s"],
                 "How long would it take a car, starting from rest and accelerating uniformly in a straight line at 5 m/s^2, to cover a distance of 200m?": [["8.94s", "8.23s", "7.32s", "17.88s"], "8.94s"],
                 "A rock is dropped off a cliff and strikes the ground with an impact velocity of 30 m/s. How high was the cliff?": "45 m",
-                "A stone is thrown horizontally with an initial speed of 30 m/s from a bridge. Find the stone’s total speed when it enters the water 4 s later? (Ignore air and water resistance)": [["50m/s", "30m/s", "10m/s", "75m/s"], "50m/s"],
+                "A stone is thrown horizontally with an initial speed of 30 m/s from a bridge. Find the stone’s total speed when it enters the water 4 s later. (Ignore air and water resistance)": "50 m/s",
                 "A car traveling at a speed of v0 m/s applies its brakes, skidding to a stop over a distance of x m with a constant deceleration. What would the skidding distance of the same car be if it were traveling at twice the initial speed?": [["3x meters", "4x meters", "2x meters", "x meters"], "4x meters"],
-                "A soccer ball, at rest on the ground, is kicked with an initial velocity of 10m/s at a launch angle of 30º. Calculate its total flight time, assuming that air resistance is negligible.": [["1.0s", "3.4s", "2.5s", "4.1s"], "1.0s"],
+                "A soccer ball, at rest on the ground, is kicked with an initial velocity of 10m/s at a launch angle of 30º. Calculate its total flight time, assuming that air resistance is negligible.": "1 s",
                 "A football is kicked at an 45º angle with an initial velocity of 15 m/s. What is the horizontal range of the football once it lands?": [["22.5m", "30.0m", "12.5m", "24.2m"], "22.5m"],
                 "A person who weighs 800 N steps onto a scale on the floor of an elevator. If the elevator accelerates upward at a rate of 5 m/s^2, what will the scale read?": [["1200N", "1100N", "1350N", "1440N"], "1200N"],
                 "A frictionless inclined plane of 30º has a 2 kg mass placed on it. What is the net force on the mass?": [["10N", "15N", "20N", "5N"], "10N"],
@@ -108,7 +108,7 @@ const questionBank = `{
 
             },
             "about": {
-                "about": "A subsection of [Physics](Physics) called Kinematics. PS. G = 10 m/s^2"
+                "about": "A subsection of [Physics](Physics) called Kinematics. Be sure to add units and for short answer questions, add a space between the value and the unit (ex. 2.0 s) <br>PS. G = 10 m/s^2"
             }
         },
         "Organic Chemistry": {
@@ -167,6 +167,7 @@ let numOfQuestionsAnsweredCorrect = 0;
 let numOfQuestions = 0;
 
 const mostRecentQueue = [];
+
 
 
 //Save category chosen from previous page

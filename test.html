@@ -8,6 +8,14 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+        <script>
+            // Make sure not going straight to test.html
+            if (document.referrer === "" || document.referrer.includes("test")) {
+                // Redirect to index.html
+                window.location.href = "index.html";
+            }
+        </script>
     </head>
     <body>
         <script defer src = "script.js"></script>
