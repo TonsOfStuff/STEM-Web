@@ -208,10 +208,15 @@ footer {
     grid-template-columns: 1fr;
     grid-template-rows: 2fr 1fr;
     align-items: center;
+    width: fit-content;
+
+    padding: 30px;
+    border: 1px #d2d2d2 solid;
 }
 
 #startButtonContainer{
     margin: 30px 15px 0px 15px;
+    text-align: -webkit-center;
 }
 
 #optionsForm{
@@ -221,7 +226,7 @@ footer {
     width: 100%;
     height: 100%;
 
-    border-bottom: #d2d2d2 1px solid;
+    /*border-bottom: #d2d2d2 1px solid;*/
     justify-self: center;
 }
 
@@ -256,6 +261,14 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 /*Question Container*/
+#titleTest{
+    font-size: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+
 .questionContainer{
     margin-top: 30px;
     margin-bottom: 10px;
@@ -501,7 +514,7 @@ input[type="search"]{
 
     #submit{
         width: 20vw;
-        font-size: 5vw;
+        font-size: 4vw;
     }
 
     .questionBox {

@@ -2,12 +2,15 @@ let questionsAnsweredCorrect = 0;
 let previousAnsweredCorrect = 0;
 
 const filler = document.getElementById("filler");
+const titleTest = document.getElementById("titleTest");
 
 let chosenMC = null;
 
 function updateScoreUI(){
     scoreUI.innerText = questionsAnsweredCorrect.toString() + "/" + amountOfQuestions.toString();
 }
+
+titleTest.innerText = window.name;
 
 let counter = 0;
 

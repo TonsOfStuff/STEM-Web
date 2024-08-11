@@ -5,10 +5,7 @@ const questionBank = `{
                 "What is the force of gravity in newtons?": "9.8"
             },
             "about": {
-                "about": "This is about physics"
-            },
-            "links": {
-                "link": "https://www.crackap.com/ap/physics-1/index.html" 
+                "about": "This is about physics. <br><br>Subtopics: <ul></div>[Kinematics](Kinematics)</ul>"
             }
         },
         "Math": {
@@ -26,7 +23,7 @@ const questionBank = `{
                 "What does H2O2 decompose into?": [["H2O + O2", "H2O", "O2", "H + O2"], "H2O + O2"]
             },
             "about": {
-                "about": "This is about chemistry"
+                "about": "This is about chemistry               <br><br>Subtopics: <ul>[Organic Chemistry](Organic Chemistry)</ul>"
             }
         },
         "Material Science": {
@@ -95,10 +92,34 @@ const questionBank = `{
                 "If F1 = 20k, F2 = -5i + 10k, and F3 = 10i +15j, what is the sum of F1 + F2 + F3?": [["5i + 15j + 30k", "5k + 5i + 20j", "5i + 10k + 30j", "5j + 15i + 30k"], "5i + 15j + 30k"],
                 "A baseball is thrown straight upward. What is the ball's velocity at its highest point?": [["0m/s", "3m/s", "Cannot determine", "2m/s"], "0m/s"],
                 "How long would it take a car, starting from rest and accelerating uniformly in a straight line at 5 m/s^2, to cover a distance of 200m?": [["8.94s", "8.23s", "7.32s", "17.88s"], "8.94s"],
-                "A rock is dropped off a cliff and strikes the ground with an impact velocity of 30 m/s. How high was the cliff?": [["45m", "32m", "40m", "35m"], "45m"]
+                "A rock is dropped off a cliff and strikes the ground with an impact velocity of 30 m/s. How high was the cliff?": [["45m", "32m", "40m", "35m"], "45m"],
+                "A stone is thrown horizontally with an initial speed of 30 m/s from a bridge. Find the stone’s total speed when it enters the water 4 s later? (Ignore air and water resistance)": [["50m/s", "30m/s", "10m/s", "75m/s"], "50m/s"],
+                "A car traveling at a speed of v0 m/s applies its brakes, skidding to a stop over a distance of x m with a constant deceleration. What would the skidding distance of the same car be if it were traveling at twice the initial speed?": [["3x meters", "4x meters", "2x meters", "x meters"], "4x meters"],
+                "A soccer ball, at rest on the ground, is kicked with an initial velocity of 10m/s at a launch angle of 30º. Calculate its total flight time, assuming that air resistance is negligible.": [["1.0s", "3.4s", "2.5s", "4.1s"], "1.0s"],
+                "A football is kicked at an 45º angle with an initial velocity of 15 m/s. What is the horizontal range of the football once it lands?": [["22.5m", "30.0m", "12.5m", "24.2m"], "22.5m"],
+                "A person who weighs 800 N steps onto a scale on the floor of an elevator. If the elevator accelerates upward at a rate of 5 m/s^2, what will the scale read?": [["1200N", "1100N", "1350N", "1440N"], "1200N"],
+                "A frictionless inclined plane of 30º has a 2 kg mass placed on it. What is the net force on the mass?": [["10N", "15N", "20N", "5N"], "10N"],
+                "The coefficient of static friction between a box and ramp is 0.5. The ramp’s incline angle is 30º. If the box is placed at rest on the ramp, it will ___.": [["Accelerate down", "Accelerate, slow, stop", "Move w/ constant v", "Not move"], "Accelerate down"],
+                "If all the forces acting on an object balance so that the net force is zero, then...": [["Object is at rest", "Object’s speed will dec", "Direction changes", "None of the above"], "None of the above"],
+                "A bird with a mass of 1 kg gets hit by a 1000 kg truck with a force of 5000 N. What force does the bird exert back onto the truck?": [["5000N", "3000N", "4500N", "4750N"], "5000N"]
+
+
+
+
             },
             "about": {
-                "about": "A subsection of Physics called Kinematics. PS. G = 10 m/s^2"
+                "about": "A subsection of [Physics](Physics) called Kinematics. PS. G = 10 m/s^2"
+            }
+        },
+        "Organic Chemistry": {
+            "questions": {
+                "How many bonding sites does Carbon have?": "4",
+                "How many carbon atoms does Methane have?": "1",
+                "How many hydrogen atoms does Methanol have?": "4",
+                "Which of these is an example of an alcohol?": [["Benzene", "Acetone", "Ethanol", "Cyclobut-2-ene"], "Ethanol"]
+            },
+            "about": {
+                "about": "A subsection of [Chemistry](Chemistry) called Organic chemistry which focuses on Polymers, naming under the IUPAC naming system. The common elements you might find here are Carbon, Hydorgen, Oxygen."
             }
         }
     }
@@ -204,7 +225,7 @@ function getCategory(category){
     chosenCategory = categories[category]["questions"];
     chosenCategoryAbout = categories[category]["about"]["about"];
 
-    aboutSection.innerText = chosenCategoryAbout;
+    aboutSection.innerHTML = chosenCategoryAbout.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a onclick = "redirectTest(\'$2\')" style = "font-style: italic">$1</a>');
 }
 
 function getQuestions(){
