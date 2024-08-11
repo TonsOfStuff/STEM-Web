@@ -18,7 +18,7 @@
             <button class = "categoryButton"><div id = "categoryButtonB">Physics</div></button>
             <button class = "categoryButton"><div id = "categoryButtonC">Chemistry</div></button>
             <div id = "dropdown">
-                <button id = "dropdownButton"><a href = "search.html" style = "color:white; text-decoration: none;">All topics</a></button>
+                <button id = "dropdownButton" onclick="searchpage()">All topics</button>
                 <div id = "dropdownContent">
                     <button class = "dropdownItem"><div id = "categoryButtonD">A</div></button>
                     <button class = "dropdownItem"><div id = "categoryButtonE">B</div></button>
@@ -45,7 +45,13 @@
                             <label for="selectNumOfQuestions">Number of Questions:</label>
                             <input type = "number" id = "selectNumOfQuestions" placeholder="All">
                         </div>
-                        
+                        <div id = "selectModeContainer">
+                            <label for = "selectMode">Select difficulty:</label>
+                            <select name = "Mode" id = "selectMode">
+                                <option value = "easy">Beginner-Friendly</option>
+                                <option value = "hard">In-Depth</option>
+                            </select>
+                        </div>
                     </form>
                     
                     <button id = "startButton">Start Test</button>

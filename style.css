@@ -252,6 +252,23 @@ footer {
     font-family: 'Montserrat', sans-serif;
 }
 
+#selectModeContainer{
+    margin: 10px;
+    text-align: center;
+}
+
+#selectMode{
+    height: 30px;
+    padding: 5px;
+    border-radius: 20px;
+    background:#1e2022;
+    color: #ffffff;
+    border: none;
+    margin: 10px;
+
+    font-family: 'Montserrat', sans-serif;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;

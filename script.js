@@ -210,6 +210,10 @@ if (savedCategory !== null){
     getCategory(savedCategory);
 }
 
+function searchpage(){
+    window.location.replace("search.html")
+}
+
 //Functions
 function getCategory(category){
     numOfQuestionsAnsweredCorrect = 0;
