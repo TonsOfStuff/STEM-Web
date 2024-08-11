@@ -216,6 +216,7 @@ function searchpage(){
 
 //Functions
 function getCategory(category){
+    console.log("d")
     numOfQuestionsAnsweredCorrect = 0;
 
     let removedItem = mostRecentQueue.splice(mostRecentQueue.indexOf(category), 1);
