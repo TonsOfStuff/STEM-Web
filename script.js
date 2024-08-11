@@ -171,7 +171,7 @@ const mostRecentQueue = [];
 
 //Save category chosen from previous page
 let savedCategory = window.name;
-if (document.URL.includes("test.html") === false){
+if (document.URL.includes("test") === false){
     savedCategory = null;
 }
 
