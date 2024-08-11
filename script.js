@@ -216,7 +216,6 @@ function searchpage(){
 
 //Functions
 function getCategory(category){
-    console.log("d")
     numOfQuestionsAnsweredCorrect = 0;
 
     let removedItem = mostRecentQueue.splice(mostRecentQueue.indexOf(category), 1);
@@ -229,7 +228,6 @@ function getCategory(category){
 
     chosenCategory = categories[category]["questions"];
     chosenCategoryAbout = categories[category]["about"]["about"];
-    console.log(chosenCategory)
     aboutSection.innerHTML = chosenCategoryAbout.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a onclick = "redirectTest(\'$2\')" style = "font-style: italic">$1</a>');
 }
 
