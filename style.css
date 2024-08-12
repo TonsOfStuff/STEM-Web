@@ -248,6 +248,7 @@ footer {
     border: none;
     padding: 10px;
     height: 10px;
+    width: 150px;
 
     font-family: 'Montserrat', sans-serif;
 }
@@ -265,6 +266,7 @@ footer {
     color: #ffffff;
     border: none;
     margin: 10px;
+    width: 170px;
 
     font-family: 'Montserrat', sans-serif;
 }
@@ -530,7 +532,7 @@ input[type="search"]{
     }
 
     #submit{
-        width: 20vw;
+        width: 25vw;
         font-size: 4vw;
     }
 
