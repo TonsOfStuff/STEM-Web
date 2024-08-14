@@ -85,6 +85,7 @@ header::after{
     border: none;
     cursor: pointer; 
     text-align: center;
+    text-align: -webkit-center;
 }
 
 #dropdownButton:hover {
@@ -157,6 +158,7 @@ section{
     height: 100px;
     padding: 0px 30px 0px 30px;
     text-align: center;
+    text-align: -webkit-center;
 }
 
 .info1{
@@ -237,6 +239,7 @@ footer {
 #selectNumbersOfQuestionsContainer{
     margin: 10px;
     text-align: center;
+    text-align: -webkit-center;
 }
 
 #selectNumOfQuestions{
@@ -256,6 +259,7 @@ footer {
 #selectModeContainer{
     margin: 10px;
     text-align: center;
+    text-align: -webkit-center;
 }
 
 #selectMode{
@@ -394,6 +398,7 @@ input[type="search"]{
 
 .optionClass {
     text-align: center;
+    text-align: -webkit-center;
     align-content: center;
     margin: 2vw;
     font-size: 2vw;
@@ -447,6 +452,7 @@ input[type="search"]{
     transition: scale 0.4s ease-in-out, background-color 0.5s;
 
     text-align: center;
+    text-align: -webkit-center;
     align-content: center;
     -webkit-box-orient: horizontal;
 
@@ -544,6 +550,10 @@ input[type="search"]{
     border: 1px white solid;
 }
 
+#bluePrintTest{
+    border: 1px white solid;
+}
+
 #buttonForSAQ{
 
 }
@@ -625,6 +635,7 @@ input[type="search"]{
     height: fit-content;
 
     display: flex;
+    -webkit-align-items: center;
     gap: 15px;
 }
 
@@ -675,6 +686,19 @@ input[type="search"]{
     font-family: "Montserrat", sans-serif;
 }
 
+.dropDownForTopics{
+    background: #1e2022;
+    color: white;
+
+    font-family: "Montserrat", sans-serif;
+    
+    padding: 12px;
+    margin: 10px;
+
+    border-radius: 15px;
+    border: none;
+    outline: none;
+}
 
 
 

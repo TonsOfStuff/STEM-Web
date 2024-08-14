@@ -2,6 +2,16 @@ const formForTest = document.getElementById("formForTest");
 const addQuestionButton = document.getElementById("addQuestionButton");
 const selectDocType = document.getElementById("selectDocType");
 const questionCreationTypeContainer = document.getElementById("questionCreationTypeContainer");
+const bluePrintTest = document.getElementById("bluePrintTest");
+
+//Doc variables
+const { jsPDF } = window.jspdf;
+let doc = new jsPDF();
+
+const pageHeight = doc.internal.pageSize.height;
+const pageWidth = doc.internal.pageSize.width;
+const maxLineWidth = pageWidth - 30;
+let yOffset = 15;
 
 let chosenTestType = null;
 
@@ -9,6 +19,7 @@ let chosenTestType = null;
 function createTest(){
     chosenTestType = selectDocType.value;
     selectDocType.style.display = "none";
+    bluePrintTest.style.display = "none";
 
     const nameInput = document.createElement("input");
     const nameInputLabel = document.createElement("label");
@@ -82,6 +93,7 @@ function createMCQ(){
 
     formForTest.insertBefore(mcqPanel, questionCreationTypeContainer);
 
+    return [mcqPanel, mcqAnswerGenButton];
 }
 
 function createSAQ(){
@@ -104,6 +116,8 @@ function createSAQ(){
     saqPanel.appendChild(saqQuestionInput);
 
     formForTest.insertBefore(saqPanel, questionCreationTypeContainer);
+
+    return saqPanel;
 }
 
 
@@ -142,18 +156,12 @@ function generatePDF(){
     let mcqLetters = 0;
     let questionCount = 0;
 
-
-
-
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-
-    let yOffset = 15;
+    doc = new jsPDF();
 
     doc.setFontSize(25);
 
     const testName = document.getElementById("nameInput").value
-    doc.text(testName, 10, yOffset);
+    addTextToPDF(testName, 10, yOffset);
     
     const allQuestion = document.querySelectorAll(".panel");
     
@@ -167,23 +175,23 @@ function generatePDF(){
         if (element.classList[0] === "mcqPanel") {
             const inputVal = element.childNodes[1]
             if (inputVal.value === ""){
-                doc.text(questionCount.toString() + ". " + "No question added", 15, yOffset)
+                addTextToPDF(questionCount.toString() + ".  " + "No question added", 15, yOffset)
             }else{
-                doc.text(questionCount.toString() + ". " + inputVal.value, 15, yOffset)
+                addTextToPDF(questionCount.toString() + ".  " + inputVal.value, 15, yOffset)
             }
     
             element.querySelectorAll(".mcqAnswerContainer").forEach(mcq => {
                 mcqLetters += 1;
                 yOffset += 8;
                 const optionLetter = String.fromCharCode(96 + mcqLetters);
-                doc.text(optionLetter + ") " + mcq.childNodes[1].value, 20, yOffset)
+                addTextToPDF(optionLetter + ") " + mcq.childNodes[1].value, 20, yOffset)
             })
         }else if (element.classList[0] === "saqPanel"){
             const saqInput = element.childNodes[1];
             if (saqInput.value === ""){
-                doc.text(questionCount.toString() + ". " + "No question added", 15, yOffset)
+                addTextToPDF(questionCount.toString() + ".  " + "No question added", 15, yOffset)
             }else{
-                doc.text(questionCount.toString() + ". " + saqInput.value, 15, yOffset)
+                addTextToPDF(questionCount.toString() + ".  " + saqInput.value, 15, yOffset)
             }
             yOffset += 10;
         }
@@ -193,8 +201,96 @@ function generatePDF(){
     doc.save(testName + ".pdf");
 }
 
+function addTextToPDF(text, x) {
+    const lines = doc.splitTextToSize(text, maxLineWidth);
+    let lineHeight = 8;
+    lines.forEach((line, index)=> {
+        if (yOffset + 10 > pageHeight) {
+            doc.addPage();
+            yOffset = 15;
+        }
+        doc.text(line, x, yOffset);
 
-function generatePDFBasedOffExisting(){
+        if (index < lines.length - 1) {
+            yOffset += lineHeight;
+        }
+    });
+}
+
+
+function selectExistingTest(){
+    selectDocType.style.display = "none";
+    bluePrintTest.innerText = "Cancel";
+    bluePrintTest.onclick = function (){
+        addQuestionButton.onclick = createTest;
+        addQuestionButton.innerText = "Create test";
+
+        selectDocType.style.display = "block";
+
+        bluePrintTest.innerText = "Load existing test";
+        bluePrintTest.onclick = selectExistingTest;
+
+        dropDownForTopics.remove();
+        labelForDropDown.remove();
+
+    }
+
+    addQuestionButton.innerText = "Import test";
+    addQuestionButton.onclick = function () {genTestBasedOffExisting(dropDownForTopics, labelForDropDown);};
+
+
+    //Create dropdown of all possible tests
+    const dropDownForTopics = document.createElement("select");
+    dropDownForTopics.classList.add("dropDownForTopics")
+
+    const labelForDropDown = document.createElement("label");
+    labelForDropDown.innerText = "Select topic:"
+
+    formForTest.insertBefore(labelForDropDown, questionCreationTypeContainer)
+    formForTest.insertBefore(dropDownForTopics, questionCreationTypeContainer)
+
+
+    Object.keys(categories).forEach(topic => {
+        const topicOpt = document.createElement("option");
+        topicOpt.innerText = topic;
+        topicOpt.value = topic;
+
+        dropDownForTopics.appendChild(topicOpt);
+    });
+}
+
+function genTestBasedOffExisting(dropdownTopics, labelForTopics){
+    const topic = dropdownTopics.value;
+    dropdownTopics.remove();
+    labelForTopics.remove();
+
+    const questions = Object.keys(categories[topic]["questions"])
+    const answers = Object.values(categories[topic]["questions"])
+
+    createTest();
+    const nameInput = document.getElementById("nameInput");
+    nameInput.value = topic;
+
+    for (let i = 0; i < questions.length; i++){
+        if (typeof(answers[i]) === "object"){
+            const mcqPanel = createMCQ();
+            mcqPanel[0].childNodes[1].value = questions[i];
+            for (let j = 0; j < 4; j++){
+                createMCQAnswer(mcqPanel[0], mcqPanel[1]);
+            }
+            const mcqChoices = mcqPanel[0].querySelectorAll(".mcqAnswerContainer")
+            for (let j = 0; j < 4; j++){
+                mcqChoices[j].childNodes[1].value = answers[i][0][j];
+                if (answers[i][1] === answers[i][0][j]){
+                    mcqChoices[j].childNodes[0].checked = true;
+                }
+            }
+        }else{
+            const saqPanel = createSAQ();
+            saqPanel.childNodes[1].value = questions[i];
+        }
+    }
+
     
 }
 

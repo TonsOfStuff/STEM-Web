@@ -30,7 +30,7 @@
         </header>
 
         <main id = "mainForm">
-            <form onsubmit="return false">
+            <form onsubmit="return false" name = "createTestForm">
                 <div id = "formForTest">
                     <select id = "selectDocType">
                         <option value="plain">Plain</option>
@@ -38,7 +38,7 @@
                     </select>
                     <div id = "questionCreationTypeContainer">
                         <button id = "addQuestionButton" >Create test</button>
-                        <button id = "bluePrintTest">Load existing test</button>
+                        <button id = "bluePrintTest" onclick="selectExistingTest()">Load existing test</button>
                     </div>
                     
                 </div>
