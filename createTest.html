@@ -3,14 +3,17 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>StudySpiel</title>
+        <title>Create Test</title>
+
         <link href="style.css" rel="stylesheet" type="text/css" />
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     </head>
-    <body id = "mainBody">
-        <script src = "script.js" async></script>
+    <body>
+        <script defer src = "script.js"></script>
+        <script defer src = "createTestLogic.js"></script>
         <header>
             <div><a href="index.html" style="text-decoration: none; color: white; font-size: 30px; padding-left: 10px;">StudySpiel</a></div>
             <button class = "categoryButton"><div id = "categoryButtonA">Math</div></button>
@@ -25,33 +28,33 @@
                 </div>
             </div>
         </header>
-        
 
-        <div id = "main">
-            <div id = "aboutSection">
-                <section class = "section1">
-                    <div class = "info1">
-                        <h1>A website about random tests that may or may not help you study! <br>
-                        Created to assist in a variety of topics</h1>
+        <main id = "mainForm">
+            <form onsubmit="return false">
+                <div id = "formForTest">
+                    <select id = "selectDocType">
+                        <option value="plain">Plain</option>
+                        <option value="crypto">Crytography</option>
+                    </select>
+                    <div id = "questionCreationTypeContainer">
+                        <button id = "addQuestionButton" >Create test</button>
                     </div>
-                    <img src = "https://img.freepik.com/free-vector/eye-catching-glowing-question-mark-sign-background-who-why-query-vector_1017-48020.jpg?size=626&ext=jpg&ga=GA1.1.412869668.1723000400&semt=ais_hybrid" alt = "N/A" class = "image1">
-                </section>
-                <section class = "middleSection">
-                    <div style = "padding: 50px; justify-self: center; font-size: 25px;">Some topics:</div>
-                    <div id = "optionClassHome">
-                        <div class = "optionClass" onclick="nonEventListenerTest('Math')">Math</div>
-                        <div class = "optionClass" onclick="nonEventListenerTest('Physics')">Physics</div>
-                        <div class = "optionClass" id = "lastOptionClassOnHome" onclick="nonEventListenerTest('Chemistry')">Chemistry</div>
-                    </div>
-                </section>
-                <section class = "section3">
-                    <h1>Come another time :)</h1>
-                </section>
-            </div>
-            
-        </div>
-        
-        
+                    
+                </div>
+                
+            </form>
+
+
+
+
+
+        </main>
+
+
+
+
+
+
         <footer>
             <div>A website about random tests that may or may not help you study! <br><br> <span style="font-size: 12px;">jtons2008@gmail.com</span></div>
             <div id = "footerItems">
@@ -62,7 +65,5 @@
             </div>
             
         </footer>
-
-
     </body>
 </html>

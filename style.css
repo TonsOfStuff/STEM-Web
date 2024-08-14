@@ -25,7 +25,7 @@ a:hover{
 }
 
 button:hover {
-    background: linear-gradient(90deg, rgba(16,152,247,1) 10%, rgba(0,212,255,1) 100%);
+    background: linear-gradient(90deg, rgb(56 136 255) 10%, rgba(0,212,255,1) 100%);
 }
 
 body{
@@ -519,6 +519,127 @@ input[type="search"]{
     border-radius: 30px;
     box-shadow: 0 0 50px -6px #000000;
 }
+
+
+
+
+
+/*Create Test CSS*/
+#mainForm{
+    margin: 15px;
+    
+    min-height: calc(100vh - var(--headerHeight) - 115px);
+
+    
+}
+
+#formForTest {
+    display: grid;
+
+    grid-template-columns: 1fr;
+    justify-items: center;
+}
+
+#addQuestionButton{
+    border: 1px white solid;
+}
+
+#addQuestionButton:hover{
+    background-color:#2e57d3;
+}
+
+#questionCreationTypeContainer{
+    padding: 10px;
+}
+
+.nameInput{
+
+}
+
+.nameDiv{
+    margin: 10px;
+}
+
+.mcqPanel{
+    margin: 20px;
+    min-height: 200px;
+    width: 90%;
+    padding: 15px;
+
+    border: 1px white solid;
+    border-radius: 15px;
+
+    display: grid;
+    grid-template-columns: 1fr;
+
+    gap: 20px;
+}
+
+.deleteQuestionButton{
+    position: absolute;
+    justify-self: right;
+    font-size: 12px;
+}
+
+.mcqQuestionInput{
+    margin-top: 30px;
+    height: max-content;
+
+    background-color: #1e2022;
+    color: white;
+    outline: none;
+    border: none;
+    padding: 20px;
+    border-radius: 15px;
+
+    font-family: "Montserrat", sans-serif;
+}
+
+.mcqAnswerGenButton{
+    width: fit-content;
+    justify-self: center;
+
+    border: 1px white solid;
+}
+
+.mcqAnswerContainer{
+    width: 100%;
+    height: fit-content;
+
+    display: flex;
+    gap: 15px;
+}
+
+.mcqAnswerCheck{
+    accent-color: black;
+    width: 15px;
+}
+
+.mcqAnswerInput{
+    width: 100%;
+    background: #1e2022;
+    color: white;
+
+    padding: 10px;
+
+    outline: none;
+    border: none;
+
+    border-radius: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @media only screen and (max-width: 600px){
