@@ -544,6 +544,14 @@ input[type="search"]{
     border: 1px white solid;
 }
 
+#buttonForSAQ{
+
+}
+
+#buttonForPDF{
+    
+}
+
 #addQuestionButton:hover{
     background-color:#2e57d3;
 }
@@ -552,8 +560,18 @@ input[type="search"]{
     padding: 10px;
 }
 
-.nameInput{
+#nameInput{
+    margin-left: 5px;
+    height: max-content;
 
+    background-color: #1e2022;
+    color: white;
+    outline: none;
+    border: none;
+    padding: 10px;
+    border-radius: 15px;
+
+    font-family: "Montserrat", sans-serif;
 }
 
 .nameDiv{
@@ -628,7 +646,34 @@ input[type="search"]{
     border-radius: 10px;
 }
 
+.saqPanel{
+    margin: 20px;
+    width: 90%;
+    padding: 15px;
 
+    border: 1px white solid;
+    border-radius: 15px;
+
+    display: grid;
+    grid-template-columns: 1fr;
+
+    gap: 20px;
+}
+
+.saqQuestionInput{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    height: max-content;
+
+    background-color: #1e2022;
+    color: white;
+    outline: none;
+    border: none;
+    padding: 20px;
+    border-radius: 15px;
+
+    font-family: "Montserrat", sans-serif;
+}
 
 
 
@@ -733,6 +778,18 @@ input[type="search"]{
     #optionClassHome{
         grid-template-columns: 1fr 1fr;
         padding: 10px;
+    }
+
+    #addQuestionButton{
+        font-size: 10px;
+    }
+    
+    #buttonForSAQ{
+        font-size: 10px;
+    }
+    
+    #buttonForPDF{
+        font-size: 10px;
     }
     
 }
