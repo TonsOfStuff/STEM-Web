@@ -14,6 +14,12 @@ titleTest.innerText = window.name;
 
 let counter = 0;
 
+const canonical = document.querySelector('link[rel="canonical"]');
+const correctCannonical = window.name.split(" ").join("-");
+if (canonical !== null) {
+  canonical.href = 'https://studyspiel.com/' + correctCannonical + "-test";
+}
+
 function createQuestions(){
     questionsList.forEach(element => {
         const questionCon = document.createElement("div");
