@@ -18,6 +18,7 @@ a{
     color: white;
     text-decoration: none;
     cursor: pointer;
+    font-style: italic;
 }
 
 a:hover{
@@ -191,6 +192,8 @@ footer {
 
     grid-template-columns: 2fr 1fr;
     gap: 40px;
+
+
 }
 
 #footerItems{

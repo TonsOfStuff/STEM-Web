@@ -5,7 +5,7 @@ const questionBank = `{
                 "What is the force of gravity in newtons?": "9.8"
             },
             "about": {
-                "about": "This is about physics. <br><br>Subtopics: <ul></div>[Kinematics](Kinematics)</ul>"
+                "about": "This is about physics. Physics is a branch of science where you explore the natural causes of certain things like gravity, forces, interactions between objects, etc. These help provide key insights on how the world around us works. For this topic, the bulk of questions will be focused on <a href = https://www.encyclopedia.com/science/science-magazines/physics-newtonian-physics#:~:text=Newtonian%20physics%2C%20also%20called%20Newtonian,Newton%20(1642%E2%80%931727).>Newtonian Physics</a> <br><br>Subtopics: <ul></div>[Kinematics](Kinematics)</ul>"
             }
         },
         "Math": {
