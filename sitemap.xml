@@ -9,17 +9,22 @@
 
 <url>
   <loc>https://www.studyspiel.com/</loc>
-  <lastmod>2024-08-11T22:40:50+00:00</lastmod>
+  <lastmod>2024-08-15T01:26:37+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://www.studyspiel.com/search</loc>
-  <lastmod>2024-08-11T22:40:50+00:00</lastmod>
+  <lastmod>2024-08-15T01:26:37+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://www.studyspiel.com/aboutUs</loc>
-  <lastmod>2024-08-11T22:40:50+00:00</lastmod>
+  <lastmod>2024-08-15T01:26:37+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.studyspiel.com/createTest</loc>
+  <lastmod>2024-08-15T01:26:37+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 
