@@ -159,6 +159,7 @@ function generatePDF(){
     doc = new jsPDF();
 
     doc.setFontSize(25);
+    doc.setFont
 
     const testName = document.getElementById("nameInput").value
     addTextToPDF(testName, 10, yOffset);
