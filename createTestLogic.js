@@ -15,6 +15,8 @@ let yOffset = 15;
 
 let chosenTestType = null;
 
+
+
 //Functions for test creating
 function createTest(){
     chosenTestType = selectDocType.value;
