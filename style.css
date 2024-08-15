@@ -124,6 +124,15 @@ header::after{
 
 
 /* Main Page */
+.titleLink{
+    text-decoration: none !important; 
+    color: white; 
+    font-size: 30px; 
+    padding-left: 10px;
+    font-style: normal;
+}
+
+
 #aboutSection{
     white-space: pre-line;
     margin-bottom: 100px;
