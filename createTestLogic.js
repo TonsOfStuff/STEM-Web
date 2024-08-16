@@ -423,12 +423,12 @@ function encrypt(){
                 }
                 let cipherNum = a.indexOf(plaintext[i]) + Math.round(question.parentElement.childNodes[3].value);
                 if (cipherNum > 25){
-                    cipherNum -= 26;
+                    cipherNum %= 26;
                 }
                 ciphertext += a[cipherNum];
             }
-        }else if (question.innerText === "Xenocrypts"){             //XENOCRYPTS
-            const dupe = shuffleReturn(a)
+        }else if (question.innerText === "Xenocrypt"){             //XENOCRYPTS
+            const dupe = derangement(a)
             for (let i = 0; i < plaintext.length; i++){
                 if (a.includes(plaintext[i]) === false){
                     ciphertext += plaintext[i];
@@ -436,7 +436,7 @@ function encrypt(){
                 }
                 ciphertext += dupe[a.indexOf(plaintext[i])];
             }
-        }else if (question.innerText === "Affine"){         //AFFINE
+        }else if (question.innerText.includes("Aristocrat")){         //Aristocrat
             for (let i = 0; i < plaintext.length; i++){
                 if (a.includes(plaintext[i]) === false){
                     ciphertext += plaintext[i];
@@ -485,7 +485,7 @@ function createPDFCypher(answers){
 
 
 //Stolen code from ChatGPT lmaooo except bottom part which looks significantly worse ;(
-function codeBustersColumn(text, x, y, rectWidth = 10, rectHeight = 10) {
+function codeBustersColumn(text, x, y, rectWidth = 8, rectHeight = 8) {
 
     let hashTable = new Map();
 
@@ -499,13 +499,33 @@ function codeBustersColumn(text, x, y, rectWidth = 10, rectHeight = 10) {
     doc.setFontSize(15);
     for (let i = 0; i < text.length; i++) {
         const letter = text[i];
-        hashTable.set(letter, (hashTable.get(letter) ?? 0) + 1)
+        
+        hashTable.set(letter, (hashTable.get(letter) ?? 0) + 1);
 
         // If the box would go off the right side of the page, wrap to the next line
         if (x + rectWidth + rightMargin > pageWidth) {
             x = rightMargin; // Reset x position to the left margin
             y += rectHeight * 2 + 5; // Move y position down for the next row of boxes
             yOffset = y;
+        }
+
+        let widthBox = 0
+        for (let j = 1; j <= text.length-i; j++){ //No idea what this does but some text wrapping here
+            console.log(j)
+            let check = text[i + j];
+            
+            if (check !== " "){
+                widthBox += rectWidth;
+            }else{
+                if (widthBox + x + rightMargin > pageWidth && x != rightMargin){
+                    x = rightMargin;
+                    y += rectHeight * 2 + 5;
+                    yOffset = y;
+                    break;
+                }else{
+                    break;
+                }
+            }
         }
 
         // If the box would go off the bottom of the page, create a new page
@@ -523,7 +543,7 @@ function codeBustersColumn(text, x, y, rectWidth = 10, rectHeight = 10) {
         // If the letter is not a space, draw the letter inside the first rectangle
         if (letter !== " ") {
             const textX = x + rectWidth / 2 - doc.getTextWidth(letter) / 2;
-            const textY = y + rectHeight / 2 + 3; // Adjust vertical centering as needed
+            const textY = y + rectHeight / 2 + 2; // Adjust vertical centering as needed
             doc.text(letter, textX, textY);
         }
 
@@ -541,18 +561,18 @@ function codeBustersColumn(text, x, y, rectWidth = 10, rectHeight = 10) {
     }
     x = rightMargin;
 
-    doc.setFontSize(8);
-    rectHeight -= 5;
-    rectWidth -= 5;
+    doc.setFontSize(10);
+    rectHeight -= 2;
+    rectWidth -= 2;
 
     doc.setFont("Times", "bold");
 
-    let xText = x + rectWidth / 2 + doc.getTextWidth("Frequency") / 2 - 5;
-    let yText = y + 3.5; 
+    let xText = x + rectWidth / 2 + doc.getTextWidth("Frequency") / 2 - 8;
+    let yText = y + 4; 
     doc.text("Frequency", xText, yText);
 
-    xText = x + rectWidth / 2 + doc.getTextWidth("Replacement") / 2 - 8;
-    yText = y + 3.5 + rectWidth; 
+    xText = x + rectWidth / 2 + doc.getTextWidth("Replacement") / 2 - 12;
+    yText = y + 4 + rectWidth; 
     doc.text("Replacement", xText, yText);
 
     doc.rect(x, y, rectWidth + 15, rectHeight)
@@ -593,22 +613,31 @@ function codeBustersColumn(text, x, y, rectWidth = 10, rectHeight = 10) {
 
 
 
-//Fisher-Yates Shuffle Alg
-function shuffleReturn(array) {
-    let currentIndex = array.length;
-    let copy = [...array]
+//Fisher-Yates Shuffle Algorithm
+function derangement(array) {
+    // Helper function to check if the permutation is a derangement
+    function isDerangement(arr, original) {
+        return arr.every((value, index) => value !== original[index]);
+    }
 
-    // While there remain elements to shuffle...
-    while (currentIndex != 0) {
+    // Function to generate a derangement
+    function generateDerangement(arr) {
+        let deranged;
+        do {
+            deranged = shuffleReturn(arr);
+        } while (!isDerangement(deranged, arr));
+        return deranged;
+    }
 
-        // Pick a remaining element...
-        let randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
+    // Shuffle function (Fisher-Yates)
+    function shuffleReturn(array) {
+        const copy = [...array];
+        for (let i = copy.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [copy[i], copy[j]] = [copy[j], copy[i]];
+        }
+        return copy;
+    }
 
-        // And swap it with the current element.
-        [copy[currentIndex], copy[randomIndex]] = [copy[randomIndex], copy[currentIndex]];
-    };
-
-    return copy;
-
+    return generateDerangement(array);
 }
