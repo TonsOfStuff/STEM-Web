@@ -3,6 +3,9 @@ const addQuestionButton = document.getElementById("addQuestionButton");
 const selectDocType = document.getElementById("selectDocType");
 const questionCreationTypeContainer = document.getElementById("questionCreationTypeContainer");
 const bluePrintTest = document.getElementById("bluePrintTest");
+const cipherContainer = document.getElementById("cipherContainer");
+
+const a = ["a", "b", 'c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 
 //Doc variables
 const { jsPDF } = window.jspdf;
@@ -160,8 +163,8 @@ function generatePDF(){
 
     doc = new jsPDF();
 
+    doc.setFont("Times", "normal");
     doc.setFontSize(25);
-    doc.setFont
 
     const testName = document.getElementById("nameInput").value
     addTextToPDF(testName, 10, yOffset);
@@ -298,6 +301,314 @@ function genTestBasedOffExisting(dropdownTopics, labelForTopics){
 }
 
 
-
 addQuestionButton.onclick = createTest;
 
+selectDocType.addEventListener("change", function(){
+    if (selectDocType.value === "plain"){
+        addQuestionButton.onclick = createTest;
+    }else{
+        addQuestionButton.onclick = createTestCrypto;
+    }
+})
+
+
+
+//Cryptography test
+function createTestCrypto(){
+    cipherContainer.style.display = "inline";
+
+
+    chosenTestType = selectDocType.value;
+    selectDocType.style.display = "none";
+    bluePrintTest.style.display = "none";
+
+    const nameInput = document.createElement("input");
+    const nameInputLabel = document.createElement("label");
+
+    const nameDiv = document.createElement('div');
+
+    nameDiv.classList = "nameDiv"
+
+    nameInputLabel.innerHTML = "Name: "
+
+    nameInput.placeholder = "Name of test.."
+    nameInput.id = "nameInput"
+
+    addQuestionButton.onclick = createCryptographyQuestion;
+
+    const buttonForPDF = document.createElement("button");
+    buttonForPDF.innerText = "Generate Test";
+    buttonForPDF.style.border = "1px white solid"
+    buttonForPDF.style.marginLeft = "10px"
+
+    buttonForPDF.id = "buttonForPDF";
+    addQuestionButton.innerText = "Add Cipher"
+
+    buttonForPDF.onclick = encrypt;
+
+
+    nameDiv.appendChild(nameInputLabel);
+    nameDiv.appendChild(nameInput);
+    formForTest.insertBefore(nameDiv, questionCreationTypeContainer);
+    questionCreationTypeContainer.appendChild(buttonForPDF)
+}
+
+
+function createCryptographyQuestion(){
+    //Select for different types of ciphers
+    //Warning: Lots of terrible code
+    const crPanel = document.createElement("div");
+    crPanel.classList.add("crPanel")
+
+    const deleteQuestionButton = document.createElement("a");
+    deleteQuestionButton.addEventListener("click", function(){
+        crPanel.remove();
+    })
+    deleteQuestionButton.innerText = "Delete";
+    deleteQuestionButton.classList.add("deleteQuestionButton")
+
+    const crQuestionInput = document.createElement("input");
+    crQuestionInput.placeholder = "Add text to cipher..";
+    crQuestionInput.classList.add("saqQuestionInput");
+
+    const typeOfCr = document.createElement("div");
+    typeOfCr.classList.add("typeOfCr");
+    typeOfCr.innerText = cipherContainer.value;
+    typeOfCr.style.margin="15px";
+    typeOfCr.style.position="absolute";
+    typeOfCr.style.justifySelf="left";
+    typeOfCr.style.fontSize="12px";
+
+    crPanel.appendChild(typeOfCr);
+    crPanel.appendChild(deleteQuestionButton);
+    crPanel.appendChild(crQuestionInput);
+
+    formForTest.insertBefore(crPanel, questionCreationTypeContainer);
+
+
+
+
+    if (cipherContainer.value === "Caesar"){
+        const shiftInput = document.createElement("input");
+        shiftInput.type = "number";
+        shiftInput.placeholder = "Caesar shift amount.."
+        shiftInput.value = "3";
+        shiftInput.classList.add("shiftInput");
+
+        crPanel.appendChild(shiftInput)
+    }
+
+}
+
+function encrypt(){
+    const allCr = document.querySelectorAll(".typeOfCr");
+    const listOfEncrypted = [];
+    allCr.forEach(question => {
+
+        const plaintext = question.parentElement.childNodes[2].value.toLowerCase();
+        let ciphertext = "";
+        if (question.innerText === "Atbash"){           //ATBASH
+            for (let i = 0; i < plaintext.length; i++){
+                if (a.includes(plaintext[i]) === false){
+                    ciphertext += plaintext[i];
+                    continue;
+                }
+                ciphertext += a[Math.abs(25 - a.indexOf(plaintext[i]))];
+            }
+        }else if (question.innerText === "Caesar"){         //CAESAR
+            for (let i = 0; i < plaintext.length; i++){
+                if (a.includes(plaintext[i]) === false){
+                    ciphertext += plaintext[i];
+                    continue;
+                }
+                let cipherNum = a.indexOf(plaintext[i]) + Math.round(question.parentElement.childNodes[3].value);
+                if (cipherNum > 25){
+                    cipherNum -= 26;
+                }
+                ciphertext += a[cipherNum];
+            }
+        }else if (question.innerText === "Xenocrypts"){             //XENOCRYPTS
+            const dupe = shuffleReturn(a)
+            for (let i = 0; i < plaintext.length; i++){
+                if (a.includes(plaintext[i]) === false){
+                    ciphertext += plaintext[i];
+                    continue;
+                }
+                ciphertext += dupe[a.indexOf(plaintext[i])];
+            }
+        }else if (question.innerText === "Affine"){         //AFFINE
+            for (let i = 0; i < plaintext.length; i++){
+                if (a.includes(plaintext[i]) === false){
+                    ciphertext += plaintext[i];
+                    continue;
+                }
+                ciphertext += a[(9 * a.indexOf(plaintext[i]) + 42) % 26];
+            }
+        }
+        listOfEncrypted.push(ciphertext);
+    });
+
+    createPDFCypher(listOfEncrypted)
+}
+
+
+function createPDFCypher(answers){
+    doc = new jsPDF();
+
+    doc.setFontSize(25);
+    doc.setFont
+
+    xC = 0;
+    yOffset = 15;
+
+    const testName = document.getElementById("nameInput").value
+    addTextToPDF(testName, 10, yOffset);
+    
+    const allCr = document.querySelectorAll(".crPanel");
+    
+    doc.setFontSize(15)
+    yOffset += 10;
+    let panelCounter = -1;
+    let questionCount = 0;
+    allCr.forEach(panel => {
+        panelCounter += 1;
+        questionCount += 1;
+
+        addTextToPDF(questionCount.toString() + ".  Solve this " + panel.childNodes[0].innerText + " cipher", 10);
+        yOffset += 5;
+        codeBustersColumn(answers[panelCounter], 10, yOffset)
+    });
+
+
+    doc.save(`${testName}.pdf`)
+}
+
+
+//Stolen code from ChatGPT lmaooo except bottom part which looks significantly worse ;(
+function codeBustersColumn(text, x, y, rectWidth = 10, rectHeight = 10) {
+
+    let hashTable = new Map();
+
+    const pageWidth = doc.internal.pageSize.width; // Get the page width
+    const pageHeight = doc.internal.pageSize.height; // Get the page height
+    const rightMargin = 10; // Right margin to prevent text from going off the page
+    const bottomMargin = 10; // Bottom margin to avoid text being too close to the edge
+
+    
+    doc.setFont("Times", "normal");
+    doc.setFontSize(15);
+    for (let i = 0; i < text.length; i++) {
+        const letter = text[i];
+        hashTable.set(letter, (hashTable.get(letter) ?? 0) + 1)
+
+        // If the box would go off the right side of the page, wrap to the next line
+        if (x + rectWidth + rightMargin > pageWidth) {
+            x = rightMargin; // Reset x position to the left margin
+            y += rectHeight * 2 + 5; // Move y position down for the next row of boxes
+            yOffset = y;
+        }
+
+        // If the box would go off the bottom of the page, create a new page
+        if (y + rectHeight * 2 + bottomMargin > pageHeight) {
+            doc.addPage();
+            y = bottomMargin;
+            yOffset = y; // Reset y position to the top of the new page
+        }
+
+        // Draw the first rectangle
+        doc.rect(x, y, rectWidth, rectHeight);
+        // Draw the second rectangle directly below the first
+        doc.rect(x, y + rectHeight, rectWidth, rectHeight);
+
+        // If the letter is not a space, draw the letter inside the first rectangle
+        if (letter !== " ") {
+            const textX = x + rectWidth / 2 - doc.getTextWidth(letter) / 2;
+            const textY = y + rectHeight / 2 + 3; // Adjust vertical centering as needed
+            doc.text(letter, textX, textY);
+        }
+
+        // Update the x position for the next box
+        x += rectWidth; // Move x to the right for the next box
+        
+    }
+
+    y += 40;
+    yOffset = y;
+    if (y + rectHeight * 2 + bottomMargin > pageHeight) {
+        doc.addPage();
+        y = bottomMargin;
+        yOffset = y; // Reset y position to the top of the new page
+    }
+    x = rightMargin;
+
+    doc.setFontSize(8);
+    rectHeight -= 5;
+    rectWidth -= 5;
+
+    doc.setFont("Times", "bold");
+
+    let xText = x + rectWidth / 2 + doc.getTextWidth("Frequency") / 2 - 5;
+    let yText = y + 3.5; 
+    doc.text("Frequency", xText, yText);
+
+    xText = x + rectWidth / 2 + doc.getTextWidth("Replacement") / 2 - 8;
+    yText = y + 3.5 + rectWidth; 
+    doc.text("Replacement", xText, yText);
+
+    doc.rect(x, y, rectWidth + 15, rectHeight)
+    doc.rect(x, y + rectWidth, rectWidth + 15, rectHeight)
+    
+    x += rectWidth + 15;
+
+    for (let i = 0; i < 26; i++){
+        doc.rect(x, y - rectHeight, rectWidth, rectHeight);
+        doc.rect(x, y, rectWidth, rectHeight);
+        doc.rect(x, y + rectHeight, rectWidth, rectHeight);
+
+        
+        let letterA = a[i];
+        let number = hashTable.get(a[i]) ?? 0;
+
+
+        xText = x + rectWidth / 2 - doc.getTextWidth(letterA) / 2 - 0.5;
+        yText = y + 3.5 - rectHeight; 
+        doc.setFont("Times", "bold");
+        doc.text(letterA.toString().toUpperCase(), xText, yText);
+
+        xText = x + rectWidth / 2 - doc.getTextWidth(number.toString()) / 2;
+        yText = y + 3.5; 
+        doc.setFont("Times", "normal");
+        doc.text(number.toString(), xText, yText);
+
+        x += rectWidth
+    }
+
+    doc.setFontSize(15);
+    yOffset += 40;
+}
+
+
+
+
+
+
+
+//Fisher-Yates Shuffle Alg
+function shuffleReturn(array) {
+    let currentIndex = array.length;
+    let copy = [...array]
+
+    // While there remain elements to shuffle...
+    while (currentIndex != 0) {
+
+        // Pick a remaining element...
+        let randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [copy[currentIndex], copy[randomIndex]] = [copy[randomIndex], copy[currentIndex]];
+    };
+
+    return copy;
+
+}

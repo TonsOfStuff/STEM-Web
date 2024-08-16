@@ -181,6 +181,12 @@ section{
     font-size: 2.5vw;
 }
 
+.info1 h2{
+    overflow: hidden;
+    font-weight: 200;
+    font-size: 1.5vw;
+}
+
 .image1{
     height: 25vw;
     box-shadow: 0 0 0px 20px #1f2022;
@@ -598,6 +604,11 @@ input[type="search"]{
 
 #questionCreationTypeContainer{
     padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
 }
 
 #nameInput{
@@ -736,10 +747,50 @@ input[type="search"]{
     outline: none;
 }
 
+#cipherContainer{
+    height: max-content;
+    margin-right: 10px;
+    background-color: #1e2022;
+    color: white;
+    outline: none;
+    border: none;
+    padding: 15px;
+    border-radius: 13px;
 
+    font-family: "Montserrat", sans-serif;
+}
 
+.crPanel{
+    margin: 20px;
+    width: 90%;
+    padding: 15px;
 
+    border: 1px white solid;
+    border-radius: 15px;
 
+    display: grid;
+    grid-template-columns: 1fr;
+
+    gap: 20px;
+
+    animation: wobble 1.3s ease-in-out forwards;
+}
+
+/*CSS for every single codebusters*/
+.shiftInput{
+    height: max-content;
+    margin-top: -30px;
+
+    background-color: #1e2022;
+    color: white;
+    outline: none;
+    border: none;
+    padding: 10px;
+    border-radius: 15px;
+    width: 50%;
+
+    font-family: "Montserrat", sans-serif;
+}
 
 
 
@@ -783,6 +834,10 @@ input[type="search"]{
     }
 
     .info1 h1{
+        font-size: 5vw;
+    }
+
+    .info1 h2{
         font-size: 5vw;
     }
 
@@ -844,11 +899,18 @@ input[type="search"]{
         font-size: 10px;
     }
     
+    
+
     #buttonForSAQ{
         font-size: 10px;
     }
     
     #buttonForPDF{
+        font-size: 10px;
+    }
+
+    #cipherContainer{
+        padding: 10px;
         font-size: 10px;
     }
     
