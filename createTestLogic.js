@@ -456,7 +456,7 @@ function createPDFCypher(answers){
     doc = new jsPDF();
 
     doc.setFontSize(25);
-    doc.setFont
+    doc.setFont("Times", "normal");
 
     xC = 0;
     yOffset = 15;
@@ -495,7 +495,7 @@ function codeBustersColumn(text, x, y, rectWidth = 10, rectHeight = 10) {
     const bottomMargin = 10; // Bottom margin to avoid text being too close to the edge
 
     
-    doc.setFont("Times", "normal");
+    
     doc.setFontSize(15);
     for (let i = 0; i < text.length; i++) {
         const letter = text[i];
