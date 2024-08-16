@@ -467,7 +467,7 @@ function createPDFCypher(answers){
     const allCr = document.querySelectorAll(".crPanel");
     
     doc.setFontSize(15)
-    yOffset += 10;
+    yOffset += 20;
     let panelCounter = -1;
     let questionCount = 0;
     allCr.forEach(panel => {
