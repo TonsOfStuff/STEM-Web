@@ -6,6 +6,47 @@ const bluePrintTest = document.getElementById("bluePrintTest");
 const cipherContainer = document.getElementById("cipherContainer");
 
 const a = ["a", "b", 'c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+const morseLetters = [
+    '.-',
+    '-...',
+    '-.-.',
+    '-..',
+    '.',
+    '..-.',
+    '--.',
+    '....',
+    '..',
+    '.---',
+    '-.-',
+    '.-..',
+    '--',
+    '-.',
+    '---',
+    '.--.',
+    '--.-',
+    '.-.',
+    '...',
+    '-',
+    '..-',
+    '...-',
+    '.--',
+    '-..-',
+    '-.--',
+    '--..',
+];
+const morseNum = {
+    "0": '.----',
+    "1": '..---',
+    "2": '...--',
+    "3": '....-',
+    "4": '.....',
+    "5": '-....',
+    "6": '--...',
+    "7": '---..',
+    "8": '----.',
+    "9": '-----'
+}
+
 
 //Doc variables
 const { jsPDF } = window.jspdf;
@@ -336,6 +377,18 @@ function createTestCrypto(){
 
     addQuestionButton.onclick = createCryptographyQuestion;
 
+    const optionDivForCipher = document.createElement("div"); 
+    optionDivForCipher.classList.add("optionDivForCipher")
+
+    const turnOnBoxesOption = document.createElement("input");
+    turnOnBoxesOption.type = "checkbox";
+    turnOnBoxesOption.id = "turnOnBoxesOption";
+    const turnOnBoxesLabel = document.createElement("label");
+    turnOnBoxesLabel.innerText = "Turn on boxes: "; 
+
+    optionDivForCipher.appendChild(turnOnBoxesLabel);
+    optionDivForCipher.appendChild(turnOnBoxesOption);
+
     const buttonForPDF = document.createElement("button");
     buttonForPDF.innerText = "Generate Test";
     buttonForPDF.style.border = "1px white solid"
@@ -350,6 +403,7 @@ function createTestCrypto(){
     nameDiv.appendChild(nameInputLabel);
     nameDiv.appendChild(nameInput);
     formForTest.insertBefore(nameDiv, questionCreationTypeContainer);
+    formForTest.insertBefore(optionDivForCipher, questionCreationTypeContainer);
     questionCreationTypeContainer.appendChild(buttonForPDF)
 }
 
@@ -444,6 +498,29 @@ function encrypt(){
                 }
                 ciphertext += a[(9 * a.indexOf(plaintext[i]) + 42) % 26];
             }
+        }else if (question.innerText === "Morse"){         //MORSE
+            for (let i = 0; i < plaintext.length; i++){
+                if (Object.keys(morseNum).includes(plaintext[i])){
+                    ciphertext += morseNum[plaintext[i]];
+                    ciphertext += "/";
+                    continue;
+                }
+                if (a.includes(plaintext[i]) === false){
+                    ciphertext += plaintext[i];
+                    continue;
+                }
+                ciphertext += morseLetters[a.indexOf(plaintext[i])];
+                try{
+                    if (a.includes(plaintext[i + 1])){
+                        ciphertext += "/";
+                    }else{
+                        ciphertext += "  ";
+                    }
+                }catch{
+                    
+                }
+                
+            }
         }
         listOfEncrypted.push(ciphertext);
     });
@@ -494,9 +571,14 @@ function codeBustersColumn(text, x, y, rectWidth = 8, rectHeight = 8) {
     const rightMargin = 10; // Right margin to prevent text from going off the page
     const bottomMargin = 10; // Bottom margin to avoid text being too close to the edge
 
-    
+    const turnOnBoxesOption = document.getElementById('turnOnBoxesOption');
+
+    if (turnOnBoxesOption.checked === false){
+        text = " " + text;
+    }
     
     doc.setFontSize(15);
+    doc.setFont("Courier", "normal");
     for (let i = 0; i < text.length; i++) {
         const letter = text[i];
         
@@ -511,7 +593,6 @@ function codeBustersColumn(text, x, y, rectWidth = 8, rectHeight = 8) {
 
         let widthBox = 0
         for (let j = 1; j <= text.length-i; j++){ //No idea what this does but some text wrapping here
-            console.log(j)
             let check = text[i + j];
             
             if (check !== " "){
@@ -535,10 +616,12 @@ function codeBustersColumn(text, x, y, rectWidth = 8, rectHeight = 8) {
             yOffset = y; // Reset y position to the top of the new page
         }
 
-        // Draw the first rectangle
-        doc.rect(x, y, rectWidth, rectHeight);
-        // Draw the second rectangle directly below the first
-        doc.rect(x, y + rectHeight, rectWidth, rectHeight);
+        // Draw the boxes
+        if (turnOnBoxesOption.checked === true){
+            doc.rect(x, y, rectWidth, rectHeight);
+            doc.rect(x, y + rectHeight, rectWidth, rectHeight);
+        }
+        
 
         // If the letter is not a space, draw the letter inside the first rectangle
         if (letter !== " ") {
@@ -548,7 +631,12 @@ function codeBustersColumn(text, x, y, rectWidth = 8, rectHeight = 8) {
         }
 
         // Update the x position for the next box
-        x += rectWidth; // Move x to the right for the next box
+        if (turnOnBoxesOption.checked === true){
+            x += rectWidth; //For boxes
+        }else{
+            x += doc.getTextWidth(letter); //For no boxes
+        }
+        
         
     }
 
