@@ -425,6 +425,10 @@ function createCryptographyQuestion(){
     crQuestionInput.placeholder = "Add text to cipher..";
     crQuestionInput.classList.add("saqQuestionInput");
 
+    const crQuestionHint = document.createElement("input");
+    crQuestionHint.placeholder = "Add hint, leave blank for no hint..";
+    crQuestionHint.classList.add("crQuestionHint");
+
     const typeOfCr = document.createElement("div");
     typeOfCr.classList.add("typeOfCr");
     typeOfCr.innerText = cipherContainer.value;
@@ -436,6 +440,7 @@ function createCryptographyQuestion(){
     crPanel.appendChild(typeOfCr);
     crPanel.appendChild(deleteQuestionButton);
     crPanel.appendChild(crQuestionInput);
+    crPanel.appendChild(crQuestionHint);
 
     formForTest.insertBefore(crPanel, questionCreationTypeContainer);
 
@@ -540,6 +545,7 @@ function createPDFCypher(answers){
 
     const testName = document.getElementById("nameInput").value
     addTextToPDF(testName, 10, yOffset);
+
     
     const allCr = document.querySelectorAll(".crPanel");
     
@@ -550,9 +556,12 @@ function createPDFCypher(answers){
     allCr.forEach(panel => {
         panelCounter += 1;
         questionCount += 1;
-
-        addTextToPDF(questionCount.toString() + ".  Solve this " + panel.childNodes[0].innerText + " cipher", 10);
-        yOffset += 5;
+        if (panel.childNodes[3].value !== undefined){
+            addTextToPDF(questionCount.toString() + ".  Solve this " + panel.childNodes[0].innerText + " cipher. Hint: " + panel.childNodes[3].value, 10);
+        }else{
+            addTextToPDF(questionCount.toString() + ".  Solve this " + panel.childNodes[0].innerText + " cipher", 10);
+        }
+        yOffset += 15;
         codeBustersColumn(answers[panelCounter], 10, yOffset)
     });
 
@@ -561,93 +570,99 @@ function createPDFCypher(answers){
 }
 
 
-//Stolen code from ChatGPT lmaooo except bottom part which looks significantly worse ;(
+//Stolen code from ChatGPT lmaooo 
 function codeBustersColumn(text, x, y, rectWidth = 8, rectHeight = 8) {
-
     let hashTable = new Map();
 
     const pageWidth = doc.internal.pageSize.width; // Get the page width
     const pageHeight = doc.internal.pageSize.height; // Get the page height
     const rightMargin = 10; // Right margin to prevent text from going off the page
     const bottomMargin = 10; // Bottom margin to avoid text being too close to the edge
+    const leftMargin = 10; // Left margin
 
     const turnOnBoxesOption = document.getElementById('turnOnBoxesOption');
+    const isBoxOn = turnOnBoxesOption.checked;
 
-    if (turnOnBoxesOption.checked === false){
-        text = " " + text;
-    }
     
+
     doc.setFontSize(15);
     doc.setFont("Courier", "normal");
-    for (let i = 0; i < text.length; i++) {
-        const letter = text[i];
-        
-        hashTable.set(letter, (hashTable.get(letter) ?? 0) + 1);
 
-        // If the box would go off the right side of the page, wrap to the next line
-        if (x + rectWidth + rightMargin > pageWidth) {
-            x = rightMargin; // Reset x position to the left margin
-            y += rectHeight * 2 + 5; // Move y position down for the next row of boxes
-            yOffset = y;
-        }
+    let words = text.split(' '); // Split the text into words
 
-        let widthBox = 0
-        for (let j = 1; j <= text.length-i; j++){ //No idea what this does but some text wrapping here
-            let check = text[i + j];
-            
-            if (check !== " "){
-                widthBox += rectWidth;
-            }else{
-                if (widthBox + x + rightMargin > pageWidth && x != rightMargin){
-                    x = rightMargin;
-                    y += rectHeight * 2 + 5;
-                    yOffset = y;
-                    break;
-                }else{
-                    break;
+    words.forEach(word => {
+        let wordWidth = doc.getTextWidth(word) + doc.getTextWidth(" ");
+
+        if (x + wordWidth + rightMargin > pageWidth) {
+            if (wordWidth + rightMargin > pageWidth) {
+                // Word is too long, fall back to letter-by-letter wrapping
+                for (let letter of word) {
+                    // Check if adding the letter will exceed page width
+                    let letterWidth = isBoxOn ? rectWidth : doc.getTextWidth(letter);
+                    if (x + letterWidth + rightMargin > pageWidth) {
+                        x = leftMargin; // Reset x position to the left margin
+                        y += rectHeight * 2 + 5; // Move y position down for the next row of boxes
+                        yOffset = y;
+
+                    }
+
+                    // Draw the boxes if enabled
+                    if (isBoxOn) {
+                        doc.rect(x, y - 5.5, rectWidth, rectHeight);
+                        doc.rect(x, y + rectHeight - 5.5, rectWidth, rectHeight);
+                    }
+
+                    // Draw the letter inside the box or at the correct position if not using boxes
+                    let textX = x;
+                    if (letter !== " ") {
+                        if (isBoxOn) {
+                            textX = x + rectWidth / 2 - doc.getTextWidth(letter) / 2;
+                        }
+                        let textY = y + rectHeight + 5; // Adjust vertical centering as needed
+                        addTextToPDF(letter, textX, textY);
+                    }
+
+                    // Update the x position for the next letter
+                    x += letterWidth;
                 }
+
+                // Add space after the word
+                x += doc.getTextWidth(" ");
+            } else {
+                // Wrap the whole word to the next line
+                x = leftMargin; // Reset x position to the left margin
+                y += rectHeight * 2 + 5; // Move y position down for the next row of boxes
+                yOffset = y;
             }
-        }
-
-        // If the box would go off the bottom of the page, create a new page
-        if (y + rectHeight * 2 + bottomMargin > pageHeight) {
-            doc.addPage();
-            y = bottomMargin;
-            yOffset = y; // Reset y position to the top of the new page
-        }
-
-        // Draw the boxes
-        if (turnOnBoxesOption.checked === true){
-            doc.rect(x, y, rectWidth, rectHeight);
-            doc.rect(x, y + rectHeight, rectWidth, rectHeight);
-        }
-        
-
-        // If the letter is not a space, draw the letter inside the first rectangle
-        if (letter !== " ") {
-            const textX = x + rectWidth / 2 - doc.getTextWidth(letter) / 2;
-            const textY = y + rectHeight / 2 + 2; // Adjust vertical centering as needed
-            doc.text(letter, textX, textY);
-        }
-
-        // Update the x position for the next box
-        if (turnOnBoxesOption.checked === true){
-            x += rectWidth; //For boxes
         }else{
-            x += doc.getTextWidth(letter); //For no boxes
-        }
-        
-        
-    }
+            // Draw the word that fits on the line
+            for (let letter of word) {
+                let textX = x;
+                if (isBoxOn) {
+                    textX = x + rectWidth / 2 - doc.getTextWidth(letter) / 2;
+                    doc.rect(x, y - 5.5, rectWidth, rectHeight);
+                    doc.rect(x, y + rectHeight - 5.5, rectWidth, rectHeight);
+                }
+                let textY = y + rectHeight + 5; // Adjust vertical centering as needed
+                addTextToPDF(letter, textX, textY);
+                x += isBoxOn ? rectWidth : doc.getTextWidth(letter);
+            }
 
+
+            x += doc.getTextWidth(" ");
+        }
+
+        
+
+    });
+
+    // Adjust margins and add any additional content as needed
     y += 40;
-    yOffset = y;
     if (y + rectHeight * 2 + bottomMargin > pageHeight) {
         doc.addPage();
         y = bottomMargin;
-        yOffset = y; // Reset y position to the top of the new page
     }
-    x = rightMargin;
+    x = leftMargin;
 
     doc.setFontSize(10);
     rectHeight -= 2;
@@ -656,43 +671,40 @@ function codeBustersColumn(text, x, y, rectWidth = 8, rectHeight = 8) {
     doc.setFont("Times", "bold");
 
     let xText = x + rectWidth / 2 + doc.getTextWidth("Frequency") / 2 - 8;
-    let yText = y + 4; 
+    let yText = y + 4;
     doc.text("Frequency", xText, yText);
 
     xText = x + rectWidth / 2 + doc.getTextWidth("Replacement") / 2 - 12;
-    yText = y + 4 + rectWidth; 
+    yText = y + 4 + rectWidth;
     doc.text("Replacement", xText, yText);
 
-    doc.rect(x, y, rectWidth + 15, rectHeight)
-    doc.rect(x, y + rectWidth, rectWidth + 15, rectHeight)
+    doc.rect(x, y, rectWidth + 15, rectHeight);
+    doc.rect(x, y + rectWidth, rectWidth + 15, rectHeight);
     
     x += rectWidth + 15;
 
-    for (let i = 0; i < 26; i++){
+    for (let i = 0; i < 26; i++) {
         doc.rect(x, y - rectHeight, rectWidth, rectHeight);
         doc.rect(x, y, rectWidth, rectHeight);
         doc.rect(x, y + rectHeight, rectWidth, rectHeight);
 
-        
         let letterA = a[i];
         let number = hashTable.get(a[i]) ?? 0;
 
-
         xText = x + rectWidth / 2 - doc.getTextWidth(letterA) / 2 - 0.5;
-        yText = y + 3.5 - rectHeight; 
+        yText = y + 3.5 - rectHeight;
         doc.setFont("Times", "bold");
         doc.text(letterA.toString().toUpperCase(), xText, yText);
 
         xText = x + rectWidth / 2 - doc.getTextWidth(number.toString()) / 2;
-        yText = y + 3.5; 
+        yText = y + 3.5;
         doc.setFont("Times", "normal");
         doc.text(number.toString(), xText, yText);
 
-        x += rectWidth
+        x += rectWidth;
     }
 
     doc.setFontSize(15);
-    yOffset += 40;
 }
 
 

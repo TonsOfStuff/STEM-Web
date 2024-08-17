@@ -776,6 +776,19 @@ input[type="search"]{
     animation: wobble 1.3s ease-in-out forwards;
 }
 
+.crQuestionHint{
+    height: max-content;
+    margin-top: -30px;
+    background-color: #1e2022;
+    color: white;
+    outline: none;
+    border: none;
+    padding: 10px;
+    border-radius: 15px;
+
+    font-family: "Montserrat", sans-serif;
+}
+
 /*CSS for every single codebusters*/
 .shiftInput{
     height: max-content;
