@@ -75,6 +75,9 @@ const baconianCipher = {
     'z': 'bbaab'
 }
 
+portaCodeY = {"a": 0, "b": 0, "c": 1, "d" : 1, "e": 2, "f": 2, "g": 3, "h": 3, "i": 4, "j": 4, "k": 5, "l": 5, "m": 6, "n": 6, "o": 7, "p": 7, "q": 8, "r": 8, "s": 9, "t": 9, "u": 10, "v": 10, "w": 11, "x": 11, "y": 12, "z": 12}
+portaCodeX = {"a": 0, "b": 1, "c": 2, "d" : 3, "e": 4, "f": 5, "g": 6, "h": 7, "i": 8, "j": 9, "k": 10, "l": 11, "m": 12, "n": 13, "o": 14, "p": 15, "q": 16, "r": 17, "s": 18, "t": 19, "u": 20, "v": 21, "w": 22, "x": 23, "y": 24, "z": 25}
+portaCipher = "nopqrstuvwxyzabcdefghijklm"
 
 //Doc variables
 const { jsPDF } = window.jspdf;
@@ -483,6 +486,13 @@ function createCryptographyQuestion(){
         shiftInput.classList.add("shiftInput");
 
         crPanel.appendChild(shiftInput)
+    }else if (cipherContainer.value === "Porta"){
+        const keyword = document.createElement("input");
+        keyword.type = "text";
+        keyword.placeholder = "Porta keyword.."
+        keyword.classList.add("shiftInput");
+
+        crPanel.appendChild(keyword)
     }
 
 }
@@ -508,7 +518,7 @@ function encrypt(){
                     ciphertext += plaintext[i];
                     continue;
                 }
-                let cipherNum = a.indexOf(plaintext[i]) + Math.round(question.parentElement.childNodes[3].value);
+                let cipherNum = a.indexOf(plaintext[i]) + Math.round(question.parentElement.childNodes[4].value);
                 if (cipherNum > 25){
                     cipherNum %= 26;
                 }
@@ -562,6 +572,38 @@ function encrypt(){
                 }else{
                     ciphertext += plaintext[i];
                 }
+            }
+        }
+        else if (question.innerText === "Porta"){                   //PORTA
+            let porta = portaCipher.split("");
+            let keyword = ""
+            keyword = question.parentElement.childNodes[4].value;
+            keyword = keyword.split(" ").join("");
+            if (keyword === ""){
+                keyword = "keyword";
+            }
+            keyword = keyword.repeat(Math.round(plaintext.length / keyword.length) + 2)
+            let counter = 0;
+            for (let i = 0; i < plaintext.length; i++){
+                porta = portaCipher.split("");
+                if (Object.keys(portaCodeX).includes(plaintext[i])){
+                    for (k = 0; k < portaCodeY[keyword[i - counter]]; k++){
+                        let be = porta.shift();
+                        let end = porta.pop();
+                        porta.splice(12, 0, be);
+                        porta.splice(13, 0, end);
+                        
+                    }
+                }else{
+                    counter += 1;
+                }
+                
+                if (Object.keys(portaCodeX).includes(plaintext[i])){
+                    ciphertext += porta[portaCodeX[plaintext[i]]];
+                }else{
+                    ciphertext += plaintext[i];
+                }
+                
             }
         }
         listOfEncrypted.push(ciphertext);
@@ -630,7 +672,7 @@ function codeBustersColumn(text, x, y, type, rectWidth = 8, rectHeight = 8, ) {
     let words = text.split(' '); // Split the text into words
 
     words.forEach(word => {
-        let wordWidth = isBoxOn ? rectWidth : doc.getTextWidth(word) + doc.getTextWidth(" ");
+        let wordWidth = isBoxOn ? rectWidth * word.length : doc.getTextWidth(word) + doc.getTextWidth(" ");
 
         if (x + wordWidth + rightMargin > pageWidth) {
             if (wordWidth + rightMargin > pageWidth) {
@@ -638,7 +680,7 @@ function codeBustersColumn(text, x, y, type, rectWidth = 8, rectHeight = 8, ) {
                 for (let letter of word) {
                     // Check if adding the letter will exceed page width
                     let letterWidth = isBoxOn ? rectWidth : doc.getTextWidth(letter);
-                    console.log(letterWidth);
+                    
                     if (x + letterWidth + rightMargin > pageWidth) {
                         x = leftMargin; // Reset x position to the left margin
                         y += rectHeight * 2 + 5; // Move y position down for the next row of boxes
@@ -679,6 +721,27 @@ function codeBustersColumn(text, x, y, type, rectWidth = 8, rectHeight = 8, ) {
                 x = leftMargin; // Reset x position to the left margin
                 y += rectHeight * 2 + 5; // Move y position down for the next row of boxes
                 yOffset = y;
+
+                for (let letter of word) {
+                    let textX = x;
+                    if (isBoxOn) {
+                        textX = x + rectWidth / 2 - doc.getTextWidth(letter) / 2;
+                        doc.rect(x, y - 5.5, rectWidth, rectHeight);
+                        doc.rect(x, y + rectHeight - 5.5, rectWidth, rectHeight);
+                    }
+                    let textY = y + rectHeight + 5; // Adjust vertical centering as needed
+                    addTextToPDF(letter, textX, textY);
+                    x += isBoxOn ? rectWidth : doc.getTextWidth(letter);
+                }
+    
+    
+                if (isBoxOn){
+                    doc.rect(x, y - 5.5, rectWidth, rectHeight);
+                    doc.rect(x, y + rectHeight - 5.5, rectWidth, rectHeight);
+                    x += rectWidth;
+                }else{
+                    x += doc.getTextWidth(" ");
+                }
             }
         }else{
             // Draw the word that fits on the line

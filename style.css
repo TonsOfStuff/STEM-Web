@@ -792,7 +792,6 @@ input[type="search"]{
 /*CSS for every single codebusters*/
 .shiftInput{
     height: max-content;
-    margin-top: -30px;
 
     background-color: #1e2022;
     color: white;
