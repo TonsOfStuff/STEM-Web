@@ -46,6 +46,34 @@ const morseNum = {
     "8": '----.',
     "9": '-----'
 }
+const baconianCipher = {
+    'a': 'aaaaa',
+    'b': 'aaaab',
+    'c': 'aaaba', 
+    'd': 'aaabb', 
+    'e': 'aabaa',
+    'f': 'aabab', 
+    'g': 'aabba', 
+    'h': 'aabbb', 
+    'i': 'abaaa', 
+    'j': 'abaab',
+    'k': 'ababa', 
+    'l': 'ababb', 
+    'm': 'abbaa', 
+    'n': 'abbab', 
+    'o': 'abbba',
+    'p': 'abbbb', 
+    'q': 'baaaa', 
+    'r': 'baaab', 
+    's': 'baaba', 
+    't': 'baabb',
+    'u': 'babaa', 
+    'v': 'babab', 
+    'w': 'babba', 
+    'x': 'babbb', 
+    'y': 'bbaaa', 
+    'z': 'bbaab'
+}
 
 
 //Doc variables
@@ -495,7 +523,7 @@ function encrypt(){
                 }
                 ciphertext += dupe[a.indexOf(plaintext[i])];
             }
-        }else if (question.innerText.includes("Aristocrat")){         //Aristocrat
+        }else if (question.innerText.includes("Aristocrat")){         //ARISTOCRAT
             for (let i = 0; i < plaintext.length; i++){
                 if (a.includes(plaintext[i]) === false){
                     ciphertext += plaintext[i];
@@ -527,6 +555,15 @@ function encrypt(){
                 
             }
         }
+        else if (question.innerText === "Baconian"){         //BACONIAN
+            for (let i = 0; i < plaintext.length; i++){
+                if (Object.keys(baconianCipher).includes(plaintext[i])){
+                    ciphertext += baconianCipher[plaintext[i]];
+                }else{
+                    ciphertext += plaintext[i];
+                }
+            }
+        }
         listOfEncrypted.push(ciphertext);
     });
 
@@ -556,13 +593,13 @@ function createPDFCypher(answers){
     allCr.forEach(panel => {
         panelCounter += 1;
         questionCount += 1;
-        if (panel.childNodes[3].value !== undefined){
+        if (panel.childNodes[3].value !== ""){
             addTextToPDF(questionCount.toString() + ".  Solve this " + panel.childNodes[0].innerText + " cipher. Hint: " + panel.childNodes[3].value, 10);
         }else{
             addTextToPDF(questionCount.toString() + ".  Solve this " + panel.childNodes[0].innerText + " cipher", 10);
         }
         yOffset += 15;
-        codeBustersColumn(answers[panelCounter], 10, yOffset)
+        codeBustersColumn(answers[panelCounter], 10, yOffset, panel.childNodes[0].innerText)
     });
 
 
@@ -571,7 +608,7 @@ function createPDFCypher(answers){
 
 
 //Stolen code from ChatGPT lmaooo 
-function codeBustersColumn(text, x, y, rectWidth = 8, rectHeight = 8) {
+function codeBustersColumn(text, x, y, type, rectWidth = 8, rectHeight = 8, ) {
     let hashTable = new Map();
 
     const pageWidth = doc.internal.pageSize.width; // Get the page width
@@ -584,14 +621,16 @@ function codeBustersColumn(text, x, y, rectWidth = 8, rectHeight = 8) {
     const isBoxOn = turnOnBoxesOption.checked;
 
     
-
     doc.setFontSize(15);
+    if (type === "Morse"){
+        doc.setFontSize(12);
+    }
     doc.setFont("Courier", "normal");
 
     let words = text.split(' '); // Split the text into words
 
     words.forEach(word => {
-        let wordWidth = doc.getTextWidth(word) + doc.getTextWidth(" ");
+        let wordWidth = isBoxOn ? rectWidth : doc.getTextWidth(word) + doc.getTextWidth(" ");
 
         if (x + wordWidth + rightMargin > pageWidth) {
             if (wordWidth + rightMargin > pageWidth) {
@@ -599,6 +638,7 @@ function codeBustersColumn(text, x, y, rectWidth = 8, rectHeight = 8) {
                 for (let letter of word) {
                     // Check if adding the letter will exceed page width
                     let letterWidth = isBoxOn ? rectWidth : doc.getTextWidth(letter);
+                    console.log(letterWidth);
                     if (x + letterWidth + rightMargin > pageWidth) {
                         x = leftMargin; // Reset x position to the left margin
                         y += rectHeight * 2 + 5; // Move y position down for the next row of boxes
@@ -623,13 +663,19 @@ function codeBustersColumn(text, x, y, rectWidth = 8, rectHeight = 8) {
                     }
 
                     // Update the x position for the next letter
-                    x += letterWidth;
+                    x += isBoxOn ? rectWidth : letterWidth;
                 }
 
                 // Add space after the word
-                x += doc.getTextWidth(" ");
+                if (isBoxOn){
+                    doc.rect(x, y - 5.5, rectWidth, rectHeight);
+                    doc.rect(x, y + rectHeight - 5.5, rectWidth, rectHeight);
+                    x += rectWidth;
+                }else{
+                    x += doc.getTextWidth(" ");
+                }
+                
             } else {
-                // Wrap the whole word to the next line
                 x = leftMargin; // Reset x position to the left margin
                 y += rectHeight * 2 + 5; // Move y position down for the next row of boxes
                 yOffset = y;
@@ -649,10 +695,14 @@ function codeBustersColumn(text, x, y, rectWidth = 8, rectHeight = 8) {
             }
 
 
-            x += doc.getTextWidth(" ");
+            if (isBoxOn){
+                doc.rect(x, y - 5.5, rectWidth, rectHeight);
+                doc.rect(x, y + rectHeight - 5.5, rectWidth, rectHeight);
+                x += rectWidth;
+            }else{
+                x += doc.getTextWidth(" ");
+            }
         }
-
-        
 
     });
 
