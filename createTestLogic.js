@@ -539,7 +539,19 @@ function encrypt(){
                     ciphertext += plaintext[i];
                     continue;
                 }
-                ciphertext += a[(9 * a.indexOf(plaintext[i]) + 42) % 26];
+                ciphertext += a[(Math.round(Math.random() * 100)) % 26];
+            }
+        }else if (question.innerText === "Patristocrat"){         //PATRISTOCRAT
+            let newPlaintext = plaintext.split(" ").join("");
+            for (let i = 0; i < newPlaintext.length; i++){
+                if ((i) % 5 === 0){
+                    ciphertext += " ";
+                }
+                if (a.includes(newPlaintext[i]) === false){
+                    ciphertext += newPlaintext[i];
+                    continue;
+                }
+                ciphertext += a[(Math.round(Math.random() * 100)) % 26];
             }
         }else if (question.innerText === "Morse"){         //MORSE
             for (let i = 0; i < plaintext.length; i++){
