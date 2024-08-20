@@ -493,9 +493,29 @@ function createCryptographyQuestion(){
         keyword.classList.add("shiftInput");
 
         crPanel.appendChild(keyword)
+    }else if (cipherContainer.value === "Pollux"){
+        const dots = document.createElement("input");
+        dots.placeholder = "Dots (.).. seperated by character"
+        dots.classList.add("shiftInput");
+
+        const dash = document.createElement("input");
+        dash.placeholder = "Dashes (-).. seperated by character"
+        dash.classList.add("shiftInput");
+
+        const space = document.createElement("input");
+        space.placeholder = "Spaces ( ).. seperated by character"
+        space.classList.add("shiftInput");
+
+        crQuestionHint.placeholder = "Hint stronly recommended"
+
+        crPanel.appendChild(dots)
+        crPanel.appendChild(dash)
+        crPanel.appendChild(space)
     }
 
 }
+
+let globalHint = "";
 
 function encrypt(){
     const allCr = document.querySelectorAll(".typeOfCr");
@@ -576,6 +596,49 @@ function encrypt(){
                 }
                 
             }
+        }else if (question.innerText === "Pollux"){         //POLLUX
+            let morse = "";
+            globalHint = "Last word is '" + plaintext.split(" ").at(-1) + "'";
+            for (let i = 0; i < plaintext.length; i++){
+                if (Object.keys(morseNum).includes(plaintext[i])){
+                    morse += morseNum[plaintext[i]];
+                    morse += "/";
+                    continue;
+                }
+                if (a.includes(plaintext[i]) === false){
+                    morse += plaintext[i];
+                    continue;
+                }
+                morse += morseLetters[a.indexOf(plaintext[i])];
+                try{
+                    if (a.includes(plaintext[i + 1])){
+                        morse += "/";
+                    }else{
+                        morse += "";
+                    }
+                }catch{
+                    
+                }
+                
+                
+            }
+            const dotOptions = question.parentElement.childNodes[4].value.split("");
+            const dashOptions = question.parentElement.childNodes[5].value.split("");
+            const spaceOptions = question.parentElement.childNodes[6].value.split("");
+            console.log(morse.split(" ").join(" "));
+            for (let i = 0; i < morse.length; i++){
+                
+                if (morse[i] === " "){
+                    ciphertext += spaceOptions[Math.round(Math.random() * (spaceOptions.length - 1))] + spaceOptions[Math.round(Math.random() * (spaceOptions.length - 1))];
+                }else if(morse[i] === "/"){
+                    ciphertext += spaceOptions[Math.round(Math.random() * (spaceOptions.length - 1))];
+                }else if (morse[i] === "."){
+                    ciphertext += dotOptions[Math.round(Math.random() * (dotOptions.length - 1))]
+                }else if (morse[i] === "-"){
+                    ciphertext += dashOptions[Math.round(Math.random() * (dashOptions.length - 1))]
+                }
+                
+            }
         }
         else if (question.innerText === "Baconian"){         //BACONIAN
             for (let i = 0; i < plaintext.length; i++){
@@ -647,8 +710,9 @@ function createPDFCypher(answers){
     allCr.forEach(panel => {
         panelCounter += 1;
         questionCount += 1;
-        if (panel.childNodes[3].value !== ""){
-            addTextToPDF(questionCount.toString() + ".  Solve this " + panel.childNodes[0].innerText + " cipher. Hint: " + panel.childNodes[3].value, 10);
+        if (panel.childNodes[3].value !== "" || globalHint !== ""){
+            addTextToPDF(questionCount.toString() + ".  Solve this " + panel.childNodes[0].innerText + " cipher. Hint: " + panel.childNodes[3].value + " " + globalHint, 10);
+            globalHint = "";
         }else{
             addTextToPDF(questionCount.toString() + ".  Solve this " + panel.childNodes[0].innerText + " cipher", 10);
         }
@@ -692,7 +756,7 @@ function codeBustersColumn(text, x, y, type, rectWidth = 8, rectHeight = 8, ) {
                 for (let letter of word) {
                     // Check if adding the letter will exceed page width
                     let letterWidth = isBoxOn ? rectWidth : doc.getTextWidth(letter);
-                    
+                    hashTable.set(letter, (hashTable.get(letter) ?? 0) + 1)
                     if (x + letterWidth + rightMargin > pageWidth) {
                         x = leftMargin; // Reset x position to the left margin
                         y += rectHeight * 2 + 5; // Move y position down for the next row of boxes
@@ -735,6 +799,7 @@ function codeBustersColumn(text, x, y, type, rectWidth = 8, rectHeight = 8, ) {
                 yOffset = y;
 
                 for (let letter of word) {
+                    hashTable.set(letter, (hashTable.get(letter) ?? 0) + 1)
                     let textX = x;
                     if (isBoxOn) {
                         textX = x + rectWidth / 2 - doc.getTextWidth(letter) / 2;
@@ -758,6 +823,7 @@ function codeBustersColumn(text, x, y, type, rectWidth = 8, rectHeight = 8, ) {
         }else{
             // Draw the word that fits on the line
             for (let letter of word) {
+                hashTable.set(letter, (hashTable.get(letter) ?? 0) + 1)
                 let textX = x;
                 if (isBoxOn) {
                     textX = x + rectWidth / 2 - doc.getTextWidth(letter) / 2;
@@ -783,9 +849,11 @@ function codeBustersColumn(text, x, y, type, rectWidth = 8, rectHeight = 8, ) {
 
     // Adjust margins and add any additional content as needed
     y += 40;
+    yOffset = y;
     if (y + rectHeight * 2 + bottomMargin > pageHeight) {
         doc.addPage();
         y = bottomMargin;
+        yOffset = y;
     }
     x = leftMargin;
 
@@ -828,6 +896,8 @@ function codeBustersColumn(text, x, y, type, rectWidth = 8, rectHeight = 8, ) {
 
         x += rectWidth;
     }
+
+    yOffset += 40;
 
     doc.setFontSize(15);
 }
