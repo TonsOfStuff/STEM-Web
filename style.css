@@ -157,7 +157,7 @@ section{
 }
 
 .middleSection{
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: rgba(0, 0, 0, 0.55);
     display: grid;
     grid-template-rows: 1fr 2fr;
     height: 70vh;
