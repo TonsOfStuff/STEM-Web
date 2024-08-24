@@ -5,7 +5,7 @@ const questionBank = `{
                 "What is the force of gravity in newtons?": "9.8"
             },
             "about": {
-                "about": "This is about physics. Physics is a branch of science where you explore the natural causes of certain things like gravity, forces, interactions between objects, etc. These help provide key insights on how the world around us works. For this topic, the bulk of questions will be focused on <a href = https://www.encyclopedia.com/science/science-magazines/physics-newtonian-physics#:~:text=Newtonian%20physics%2C%20also%20called%20Newtonian,Newton%20(1642%E2%80%931727).>Newtonian Physics</a> <br><br>Subtopics: <ul></div>[Kinematics](Kinematics)</ul>"
+                "about": "This is about physics. Physics is a branch of science where you explore the natural causes of certain things like gravity, forces, interactions between objects, etc. These help provide key insights on how the world around us works. For this topic, the bulk of questions will be focused on <a href = https://www.encyclopedia.com/science/science-magazines/physics-newtonian-physics#:~:text=Newtonian%20physics%2C%20also%20called%20Newtonian,Newton%20(1642%E2%80%931727).>Newtonian Physics</a> <br><br>Some questions fetched from <a href=https://www.crackap.com/ap/physics-1/index.html>an AP site</a><br><br>Subtopics: <ul></div>[Kinematics](Kinematics)</ul>"
             }
         },
         "Math": {
@@ -23,7 +23,7 @@ const questionBank = `{
                 "What does H2O2 decompose into?": [["H2O + O2", "H2O", "O2", "H + O2"], "H2O + O2"]
             },
             "about": {
-                "about": "This is about chemistry               <br><br>Subtopics: <ul>[Organic Chemistry](Organic Chemistry)</ul>"
+                "about": "This is about <a href=https://en.wikipedia.org/wiki/Chemistry>chemistry</a>, a field of science that studies matter and its interactions with each other and the space around.               <br><br>Subtopics: <ul>[Organic Chemistry](Organic Chemistry)</ul>"
             }
         },
         "Material Science": {
@@ -119,7 +119,7 @@ const questionBank = `{
                 "Which of these is an example of an alcohol?": [["Benzene", "Acetone", "Ethanol", "Cyclobut-2-ene"], "Ethanol"]
             },
             "about": {
-                "about": "A subsection of [Chemistry](Chemistry) called Organic chemistry which focuses on Polymers, naming under the IUPAC naming system. The common elements you might find here are Carbon, Hydorgen, Oxygen."
+                "about": "A subsection of [Chemistry](Chemistry) called <a href=https://www.acs.org/careers/chemical-sciences/areas/organic-chemistry.html#:~:text=Organic%20chemistry%20is%20the%20study,phosphorus%2C%20silicon%2C%20sulfur).>Organic chemistry</a> which focuses on Polymers, naming under the <a href=https://iupac.org/>IUPAC</a> <a href=https://www2.chemistry.msu.edu/faculty/reusch/virttxtjml/nomen1.htm>naming system</a>. The common elements you might find here are Carbon, Hydorgen, Oxygen."
             }
         }
     }
