@@ -16,11 +16,40 @@
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
         <script>
-            // Make sure not going straight to test.html
-            if (document.referrer === "" || document.referrer.includes("test")) {
-                // Redirect to index.html
-                window.location.href = "index.html";
+
+            function shouldRedirect(referrer, currentDomain) {
+                if (referrer === "") {
+                    return true; // Direct access, no referrer
+                }
+
+                try {
+                    const referrerUrl = new URL(referrer);
+                    const referrerDomain = referrerUrl.hostname;
+
+                    // Check if the referrer domain is the same as the current domain
+                    if (referrerDomain !== currentDomain) {
+                        return true; // External referrer
+                    }
+
+                    // Check if the referrer is from search.html or another test.html page
+                    const referrerPath = referrerUrl.pathname;
+                    if (referrerPath.includes("search") || referrerPath.includes("test") || referrerPath.includes("index")) {
+                        return false; // Internal navigation from allowed pages
+                    }
+
+                    return true; // Other internal pages can be redirected
+                } catch (e) {
+                    return true; // Parsing failed, assume external
+                }
             }
+
+            // Get the current domain
+            const currentDomain = window.location.hostname;
+
+            // Perform the redirect if necessary
+            if (shouldRedirect(document.referrer, currentDomain)) {
+                window.location.href = "index.html";
+}
         </script>
         <script defer src = "script.js"></script>
         <script defer src = "testMech.js"></script>
