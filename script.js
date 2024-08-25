@@ -121,6 +121,23 @@ const questionBank = `{
             "about": {
                 "about": "A subsection of [Chemistry](Chemistry) called <a href=https://www.acs.org/careers/chemical-sciences/areas/organic-chemistry.html#:~:text=Organic%20chemistry%20is%20the%20study,phosphorus%2C%20silicon%2C%20sulfur).>Organic chemistry</a> which focuses on Polymers, naming under the <a href=https://iupac.org/>IUPAC</a> <a href=https://www2.chemistry.msu.edu/faculty/reusch/virttxtjml/nomen1.htm>naming system</a>. The common elements you might find here are Carbon, Hydorgen, Oxygen."
             }
+        },
+        "English": {
+            "questions": {
+                "What does exacerbate mean?": [["Make worse", "Make better", "Reduce to", "Destroy"], "Make worse"]
+            },
+            "about": {
+                "about": "About <a href=https://en.wikipedia.org/wiki/English_language>English</a>, a language spoken around the world. English is sometimes known as the one of the most difficult languages to master with many grammer rules, words, and exceptions.                      <br><br>Subtopics: <ul>[SAT English](SAT English)</ul>"
+            }
+        },
+        "SAT English": {
+            "questions": {
+                "What does exacerbate mean?": [["Make worse", "Make better", "Reduce to", "Destroy"], "Make worse"],
+                "What does recant mean?": [["Take something back", "Assert something", "Prove something", "To canel something"], "Make worse"]
+            },
+            "about": {
+                "about": "Subsection of [English](English). This topic specifically tackles SAT vocabulary and English grammer rules."
+            }
         }
     }
 }`
