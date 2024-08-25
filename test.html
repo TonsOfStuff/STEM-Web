@@ -33,7 +33,7 @@
 
                     // Check if the referrer is from search.html or another test.html page
                     const referrerPath = referrerUrl.pathname;
-                    if (referrerPath.includes("search") || referrerPath.includes("test") || referrerPath.includes("index")) {
+                    if (referrerPath.includes("search") || referrerPath.includes("test") || referrerPath.includes("index") || referrerPath === "/") {
                         return false; // Internal navigation from allowed pages
                     }
 
@@ -49,7 +49,7 @@
             // Perform the redirect if necessary
             if (shouldRedirect(document.referrer, currentDomain)) {
                 window.location.href = "index.html";
-}
+            }
         </script>
         <script defer src = "script.js"></script>
         <script defer src = "testMech.js"></script>
