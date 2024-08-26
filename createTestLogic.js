@@ -554,14 +554,16 @@ function encrypt(){
                 ciphertext += dupe[a.indexOf(plaintext[i])];
             }
         }else if (question.innerText.includes("Aristocrat")){         //ARISTOCRAT
+            const dupe = derangement(a)
             for (let i = 0; i < plaintext.length; i++){
                 if (a.includes(plaintext[i]) === false){
                     ciphertext += plaintext[i];
                     continue;
                 }
-                ciphertext += a[(Math.round(Math.random() * 100)) % 26];
+                ciphertext += dupe[a.indexOf(plaintext[i])];
             }
         }else if (question.innerText === "Patristocrat"){         //PATRISTOCRAT
+            const dupe = derangement(a)
             let newPlaintext = plaintext.split(" ").join("");
             for (let i = 0; i < newPlaintext.length; i++){
                 if ((i) % 5 === 0){
@@ -571,7 +573,7 @@ function encrypt(){
                     ciphertext += newPlaintext[i];
                     continue;
                 }
-                ciphertext += a[(Math.round(Math.random() * 100)) % 26];
+                ciphertext += dupe[a.indexOf(newPlaintext[i])];
             }
         }else if (question.innerText === "Morse"){         //MORSE
             for (let i = 0; i < plaintext.length; i++){
