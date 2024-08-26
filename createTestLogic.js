@@ -456,9 +456,21 @@ function createCryptographyQuestion(){
     crQuestionInput.placeholder = "Add text to cipher..";
     crQuestionInput.classList.add("saqQuestionInput");
 
+    const crQuestionHintContainer = document.createElement("div");
+    crQuestionHintContainer.style.display = "flex";
+    crQuestionHintContainer.style.justifyContent = "space-between";
+
+    const crQuestionPts = document.createElement("input");
+    crQuestionPts.placeholder = "Point value";
+    crQuestionPts.classList.add("crQuestionPts");
+    crQuestionPts.type = "number";
+
     const crQuestionHint = document.createElement("input");
     crQuestionHint.placeholder = "Add hint, leave blank for no hint..";
     crQuestionHint.classList.add("crQuestionHint");
+
+    crQuestionHintContainer.appendChild(crQuestionHint);
+    crQuestionHintContainer.appendChild(crQuestionPts);
 
     const typeOfCr = document.createElement("div");
     typeOfCr.classList.add("typeOfCr");
@@ -471,7 +483,7 @@ function createCryptographyQuestion(){
     crPanel.appendChild(typeOfCr);
     crPanel.appendChild(deleteQuestionButton);
     crPanel.appendChild(crQuestionInput);
-    crPanel.appendChild(crQuestionHint);
+    crPanel.appendChild(crQuestionHintContainer);
 
     formForTest.insertBefore(crPanel, questionCreationTypeContainer);
 
@@ -705,18 +717,23 @@ function createPDFCypher(answers){
     
     const allCr = document.querySelectorAll(".crPanel");
     
-    doc.setFontSize(15)
+    doc.setFontSize(12)
     yOffset += 20;
     let panelCounter = -1;
     let questionCount = 0;
+
     allCr.forEach(panel => {
         panelCounter += 1;
         questionCount += 1;
-        if (panel.childNodes[3].value !== "" || globalHint !== ""){
-            addTextToPDF(questionCount.toString() + ".  Solve this " + panel.childNodes[0].innerText + " cipher. Hint: " + panel.childNodes[3].value + " " + globalHint, 10);
+        let ptsVal = panel.childNodes[3].childNodes[1].value;
+        if (ptsVal === ""){
+            ptsVal = 0;
+        }
+        if (panel.childNodes[3].childNodes[0].value !== "" || globalHint !== ""){
+            addTextToPDF(questionCount.toString() + ".  [" + ptsVal + " points] Solve this " + panel.childNodes[0].innerText + " cipher. Hint: " + panel.childNodes[3].childNodes[0].value + " " + globalHint, 10);
             globalHint = "";
         }else{
-            addTextToPDF(questionCount.toString() + ".  Solve this " + panel.childNodes[0].innerText + " cipher", 10);
+            addTextToPDF(questionCount.toString() + ".  [" + ptsVal + " points] Solve this " + panel.childNodes[0].innerText + " cipher", 10);
         }
         yOffset += 15;
         codeBustersColumn(answers[panelCounter], 10, yOffset, panel.childNodes[0].innerText)
