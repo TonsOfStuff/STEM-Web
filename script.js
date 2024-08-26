@@ -133,7 +133,7 @@ const questionBank = `{
         "SAT English": {
             "questions": {
                 "What does exacerbate mean?": [["Make worse", "Make better", "Reduce to", "Destroy"], "Make worse"],
-                "What does recant mean?": [["Take something back", "Assert something", "Prove something", "To canel something"], "Make worse"]
+                "What does recant mean?": [["Take something back", "Assert something", "Prove something", "To canel something"], "Take something back"]
             },
             "about": {
                 "about": "Subsection of [English](English). This topic specifically tackles SAT vocabulary and English grammer rules."
