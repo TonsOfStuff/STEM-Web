@@ -614,6 +614,7 @@ input[type="search"]{
 #nameInput{
     margin-left: 5px;
     height: max-content;
+    width: 75%;
 
     background-color: #1e2022;
     color: white;
@@ -627,6 +628,9 @@ input[type="search"]{
 
 .nameDiv{
     margin: 10px;
+    width: 100%;
+    text-align: center;
+    text-align: -webkit-center;
 }
 
 .mcqPanel{
