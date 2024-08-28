@@ -26,6 +26,17 @@ const questionBank = `{
                 "about": "This is about <a href=https://en.wikipedia.org/wiki/Chemistry>chemistry</a>, a field of science that studies matter and its interactions with each other and the space around.               <br><br>Subtopics: <ul>[Organic Chemistry](Organic Chemistry)</ul>"
             }
         },
+        "Chemistry w/ Calculator": {
+            "questions": {
+                "Calculate 119 cm x (1.64 cm - 1.27 cm) =__. Use proper sig figs and units." : [["44 cm^2", "33 cm^2", "45 cm^2", "44 cm"], "44 cm^2"],
+                "How many cubic feet (ft^3) are there in a 2.0 L bottle of Coke? (1 cm^3 = 1 mL  and. 1 in = 2.54 cm)" : [["0.071 ft^3", "0.07 ft^3", "0.0713 ft^2", "0.083 ft^3"], "0.071 ft^3"],
+                "If a glass bottle with a volume of 1.5 L is completely filled with water and capped off, what is the mass of the water, in grams, in the bottle? (density = 0.997 g/cm^3)": [["1.5 x 10^3 g", "2.0 x 10^3 g", "1.23 * 10^3 g", "1.3 * 10^3 g"], "1.5 x 10^3 g"],
+                "Naturally occurring Europium has two isotopes of 151 and 153 amu. Eu-151 has an abundance of 48.03% and Eu-153 has an abundance of 51.97%. What is the average atomic mass of Eu? (to nearest hundredths) Please use appropriate units with a space between the value and the unit (ex. 4.0 cm)": "152.04 amu"
+            },
+            "about": {
+                "about": "This is about [Chemistry](Chemistry). Specifically handeling harder problems that require a calculator for the most specfic answer! Many answers require appropriate <a href=https://www.calculatorsoup.com/calculators/math/significant-figures-counter.php>Significant Figures</a> and units!"
+            }
+        },
         "Material Science": {
             "questions": {
                 "What type of material is concrete?": "composite",
@@ -95,10 +106,10 @@ const questionBank = `{
                 "A rock is dropped off a cliff and strikes the ground with an impact velocity of 30 m/s. How high was the cliff?": "45 m",
                 "A stone is thrown horizontally with an initial speed of 30 m/s from a bridge. Find the stone’s total speed when it enters the water 4 s later. (Ignore air and water resistance)": "50 m/s",
                 "A car traveling at a speed of v0 m/s applies its brakes, skidding to a stop over a distance of x m with a constant deceleration. What would the skidding distance of the same car be if it were traveling at twice the initial speed?": [["3x meters", "4x meters", "2x meters", "x meters"], "4x meters"],
-                "A soccer ball, at rest on the ground, is kicked with an initial velocity of 10m/s at a launch angle of 30º. Calculate its total flight time, assuming that air resistance is negligible.": "1 s",
+                "A soccer ball, at rest on the ground, is kicked with an initial velocity of 10m/s at a launch angle of 30º. Calculate its total flight time, assuming that air resistance is negligible. Please abbreviated appropriate units with a space between the value and the unit (ex. 2.0 km)": "1 s",
                 "A football is kicked at an 45º angle with an initial velocity of 15 m/s. What is the horizontal range of the football once it lands?": [["22.5m", "30.0m", "12.5m", "24.2m"], "22.5m"],
                 "A person who weighs 800 N steps onto a scale on the floor of an elevator. If the elevator accelerates upward at a rate of 5 m/s^2, what will the scale read?": [["1200N", "1100N", "1350N", "1440N"], "1200N"],
-                "A frictionless inclined plane of 30º has a 2 kg mass placed on it. What is the net force on the mass?": [["10N", "15N", "20N", "5N"], "10N"],
+                "A frictionless inclined plane of 30º has a 2 kg mass placed on it. What is the net force on the mass?": "10 N",
                 "The coefficient of static friction between a box and ramp is 0.5. The ramp’s incline angle is 30º. If the box is placed at rest on the ramp, it will ___.": [["Accelerate down", "Accelerate, slow, stop", "Move w/ constant v", "Not move"], "Accelerate down"],
                 "If all the forces acting on an object balance so that the net force is zero, then...": [["Object is at rest", "Object’s speed will dec", "Direction changes", "None of the above"], "None of the above"],
                 "A bird with a mass of 1 kg gets hit by a 1000 kg truck with a force of 5000 N. What force does the bird exert back onto the truck?": [["5000N", "3000N", "4500N", "4750N"], "5000N"]

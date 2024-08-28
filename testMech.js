@@ -48,14 +48,14 @@ function createQuestions(){
     
                 optionClick.addEventListener('click', function () {
                     optionClick.classList.add("multipleChoiceSelected");
-                    try{
-                        if (chosenMC !== optionClick){
-                            chosenMC.classList.remove("multipleChoiceSelected")
-                        }
-                    }catch{
-                        
-                    }
                     chosenMC = optionClick;
+
+                    optionClick.parentElement.childNodes.forEach(element => {
+                        if (element != chosenMC && element.classList.length === 2){
+                            element.classList.remove("multipleChoiceSelected");
+                        }
+                    });
+
                 })
     
     
@@ -127,19 +127,22 @@ function checkAnswer(){
 
     for (let i = 0; i < allAnswered.length; i++){
         if (typeof(answerList[i]) === "object"){
-            if (chosenMC !== null){ //Checking if nothing has been selected
-                if (chosenMC.innerText === answerList[i][1]){
-                    //Correct option for MC Question
-                    allRightOrWrongText[i].innerText = "Correct"
-                    allRightOrWrongText[i].style.color = "#00d100"
-                    questionsAnsweredCorrect += 1;
-                } else { //Wrong answer
+            for (let k = 0; k < allAnswered[i].childNodes.length; k++){
+                if (allAnswered[i].childNodes[k].classList.length === 2){ //Checking the selected
+                    if (allAnswered[i].childNodes[k].innerText === answerList[i][1]){
+                        //Correct option for MC Question
+                        allRightOrWrongText[i].innerText = "Correct"
+                        allRightOrWrongText[i].style.color = "#00d100"
+                        questionsAnsweredCorrect += 1;
+                        break;
+                    } else { //Wrong answer
+                        allRightOrWrongText[i].innerText = "Incorrect"
+                        allRightOrWrongText[i].style.color = "red"
+                    }
+                } else { //Nothings been selected
                     allRightOrWrongText[i].innerText = "Incorrect"
                     allRightOrWrongText[i].style.color = "red"
                 }
-            } else { //Nothings been selected
-                allRightOrWrongText[i].innerText = "Incorrect"
-                allRightOrWrongText[i].style.color = "red"
             }
         } else {
             if (allAnswered[i].value.toLowerCase() === answerList[i].toLowerCase()){
