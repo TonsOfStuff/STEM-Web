@@ -20,10 +20,25 @@ const questionBank = `{
         "Chemistry": {
             "questions": {
                 "What is Na?": "Sodium",
-                "What does H2O2 decompose into?": [["H2O + O2", "H2O", "O2", "H + O2"], "H2O + O2"]
+                "What does H2O2 decompose into?": [["H2O + O2", "H2O", "O2", "H + O2"], "H2O + O2"],
+                "Round 0.036782 mL to 3 sig figs. Include units with a space between value (ex. 3.4 mL)." : "0.0368 mL",
+                "Round 47000 kgs to 2 sig figs.": [["4.7 x 10^4 kg", "3.5 x 10^3 kg", "2.3 x 10^4 kg", "4.70 x 10^4 kg"], "4.7 x 10^4 kg"],
+                "Three cubes of equal masses are composed of gold (density = 19.32 g/cm^3), platinum (density 21.45 g/cm^3), and lead (density = 11.35 g/cm^3). List the order of cubes from largest to smallest in volume" : [["Pb, Au, Pt", "Au, Pt, Pb", "Au, Pb, Pt", "Pb, Pt, Au"], "Pb, Au, Pt"],
+                "Which of the following is a homogeneous mixture?": [["Table Sugar", "Kool-aid in water", "Sand in water", "Trail mix"], "Kool-aid in water"],
+                "Which of the following is a chemical change?": [["Alcohol evaporates", "Salt dissolves in water", "Paper absorb water", "Milk sours"], "Milk sours"],
+                "An alloy made of two metals where one has a significantly smaller atomic radius is called an ____ alloy.": "Interstitial",
+                "Uranium-235 and Uranium-238 are _____.": "Isotopes",
+                "Which of the following lists includes only diatomic elements?": [["S, Cl, N, I", "He, Ne, F, O", "I, F, N, Br", "C, Cl, Br, O"], "I, F, N, Br"],
+                "Name for atomic family with a charge of -3": "Pnictogens",
+                "Nomenclature for Fe(PO4)2 (Add roman numbers in parentheses)": "Iron (II) Phosphate",
+                "Nomenclature for (NH4)2O (Add roman numbers in parentheses)": "Ammonium Oxide",
+                "Nomenclature for Ca(ClO3)2 (Add roman numbers in parentheses)": "Calcium Chlorate",
+                "Chemical formula for Zinc hydrogen sulfate (add appropriate parentheses)": "Zn(HSO4)2",
+                "Chemical formula for Copper (I) dichromate (add appropriate parentheses)": "Cu2Cr2O7"
+
             },
             "about": {
-                "about": "This is about <a href=https://en.wikipedia.org/wiki/Chemistry>chemistry</a>, a field of science that studies matter and its interactions with each other and the space around.               <br><br>Subtopics: <ul>[Organic Chemistry](Organic Chemistry)</ul>"
+                "about": "This is about <a href=https://en.wikipedia.org/wiki/Chemistry>chemistry</a>, a field of science that studies matter and its interactions with each other and the space around.               <br><br>Subtopics: <ul>[Organic Chemistry](Organic Chemistry)</ul><ul>[Chemistry w/ Calculator](Chemistry w/ Calculator)</ul>"
             }
         },
         "Chemistry w/ Calculator": {
