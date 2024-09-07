@@ -757,6 +757,8 @@ function codeBustersColumn(text, x, y, type, rectWidth = 8, rectHeight = 8, ) {
     const turnOnBoxesOption = document.getElementById('turnOnBoxesOption');
     const isBoxOn = turnOnBoxesOption.checked;
 
+    const docsThatDontNeed = ["Morse", "Morbit", "Pollux", ]
+
     
     doc.setFontSize(15);
     if (type === "Morse"){
@@ -876,52 +878,54 @@ function codeBustersColumn(text, x, y, type, rectWidth = 8, rectHeight = 8, ) {
     }
     x = leftMargin;
 
-    doc.setFontSize(10);
-    rectHeight -= 2;
-    rectWidth -= 2;
+    if (docsThatDontNeed.includes(type) === false){
+        doc.setFontSize(10);
+        rectHeight -= 2;
+        rectWidth -= 2;
 
-    doc.setFont("Times", "bold");
-
-    let xText = x + rectWidth / 2 + doc.getTextWidth("Frequency") / 2 - 8;
-    let yText = y + 4;
-    doc.text("Frequency", xText, yText);
-
-    xText = x + rectWidth / 2 + doc.getTextWidth("Replacement") / 2 - 12;
-    yText = y + 4 + rectWidth;
-    doc.text("Replacement", xText, yText);
-
-    doc.rect(x, y, rectWidth + 15, rectHeight);
-    doc.rect(x, y + rectWidth, rectWidth + 15, rectHeight);
-    
-    x += rectWidth + 15;
-
-    for (let i = 0; i < 26; i++) {
-        doc.rect(x, y - rectHeight, rectWidth, rectHeight);
-        doc.rect(x, y, rectWidth, rectHeight);
-        doc.rect(x, y + rectHeight, rectWidth, rectHeight);
-
-        let letterA = a[i];
-        let number = hashTable.get(a[i]) ?? 0;
-
-        xText = x + rectWidth / 2 - doc.getTextWidth(letterA) / 2 - 0.5;
-        yText = y + 3.5 - rectHeight;
         doc.setFont("Times", "bold");
-        doc.text(letterA.toString().toUpperCase(), xText, yText);
 
-        xText = x + rectWidth / 2 - doc.getTextWidth(number.toString()) / 2;
-        yText = y + 3.5;
-        doc.setFont("Times", "normal");
-        doc.text(number.toString(), xText, yText);
+        let xText = x + rectWidth / 2 + doc.getTextWidth("Frequency") / 2 - 8;
+        let yText = y + 4;
+        doc.text("Frequency", xText, yText);
 
-        x += rectWidth;
+        xText = x + rectWidth / 2 + doc.getTextWidth("Replacement") / 2 - 12;
+        yText = y + 4 + rectWidth;
+        doc.text("Replacement", xText, yText);
+
+        doc.rect(x, y, rectWidth + 15, rectHeight);
+        doc.rect(x, y + rectWidth, rectWidth + 15, rectHeight);
+        
+        x += rectWidth + 15;
+
+        for (let i = 0; i < 26; i++) {
+            doc.rect(x, y - rectHeight, rectWidth, rectHeight);
+            doc.rect(x, y, rectWidth, rectHeight);
+            doc.rect(x, y + rectHeight, rectWidth, rectHeight);
+
+            let letterA = a[i];
+            let number = hashTable.get(a[i]) ?? 0;
+
+            xText = x + rectWidth / 2 - doc.getTextWidth(letterA) / 2 - 0.5;
+            yText = y + 3.5 - rectHeight;
+            doc.setFont("Times", "bold");
+            doc.text(letterA.toString().toUpperCase(), xText, yText);
+
+            xText = x + rectWidth / 2 - doc.getTextWidth(number.toString()) / 2;
+            yText = y + 3.5;
+            doc.setFont("Times", "normal");
+            doc.text(number.toString(), xText, yText);
+
+            x += rectWidth;
+        }
+
+        yOffset += 40;
+
+        doc.setFontSize(15);
+        
     }
 
-    yOffset += 40;
-
-    doc.setFontSize(15);
 }
-
-
 
 
 
