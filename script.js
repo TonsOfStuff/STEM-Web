@@ -164,6 +164,17 @@ const questionBank = `{
             "about": {
                 "about": "Subsection of [English](English). This topic specifically tackles SAT vocabulary and English grammer rules."
             }
+        },
+        "Fermi Questions": {
+            "questions": {
+                "How many Earths fit inside the sun?": "6",
+                "How many trees are there on Earth?": "12",
+                "How many atoms of socrates breath are there left?": "1",
+                "30^21": "31"
+            },
+            "about": {
+                "about": "Fermi Questions tackles questions that do not have an exact answer but instead can be estimated. Questions like how many atoms are there on Earth is impossible to get an exact amount, but using existing knowledge, building up an estimation isn't hard. Fermi questions requires users to answer in terms of powers. For example, if your answer is 10^6 or a million, you just put 6. Make sure to round!"
+            }
         }
     }
 }`
