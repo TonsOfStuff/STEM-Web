@@ -27,7 +27,23 @@ function createQuestions(){
     
         //Question text box
         const questionaire = document.createElement("div");
-        const questionaireText = document.createTextNode(element);
+        
+        const image = element.match(/\{(.*?)\}/);
+        let updateText = element;
+        console.log(element);
+
+        if (image != null){
+            updateText = updateText.replace(/\{(.*?)\}/g, "");
+            const imageEl = document.createElement("img");
+            imageEl.src = image[1];
+            imageEl.style.width = "50vh";
+            imageEl.style.maxWidth = "70%";
+            imageEl.style.margin = "30px auto";
+            imageEl.style.display = "block";
+            questionCon.appendChild(imageEl);
+        }
+
+        const questionaireText = document.createTextNode(updateText);
     
         questionaire.className = "questionBox";
         questionaire.appendChild(questionaireText);
