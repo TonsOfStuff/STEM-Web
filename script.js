@@ -64,7 +64,8 @@ const questionBank = `{
         "Astronomy": {
             "questions": {
                 "What element is most abundant in stars?": "Hydrogen",
-                "What is the B-V index of a star with B = 3 and V = 2": "1"
+                "What is the B-V index of a star with B = 3 and V = 2": "1",
+                "{https://useruploads.socratic.org/fiSP0m0ARcuU0oeaTZun_hr_diagram.jpg}What diagram is this?": [["HR Diagram", "Star Spectrograph", "Stellar Isochrone", "Spectral Visualizer"], "HR Diagram"]
             },
             "about": {
                 "about": "This is about astronomy"
