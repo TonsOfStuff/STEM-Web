@@ -523,6 +523,42 @@ function createCryptographyQuestion(){
         crPanel.appendChild(dots)
         crPanel.appendChild(dash)
         crPanel.appendChild(space)
+    }else if (cipherContainer.value === "Cryptarithm"){
+        crQuestionInput.placeholder = "Add equation like shirt + tshirt = clothes"
+        const checkSolutions = document.createElement("button");
+        
+
+        const numOfSolutions = document.createElement("div");
+        const solDiv = document.createElement("div");
+        checkSolutions.innerText = "Check for solutions";
+        numOfSolutions.innerText = "0 Solutions";
+
+        checkSolutions.onclick = () => {
+            let newPlain = crQuestionInput.value.split(" + ").join(" ").split(" = ").join(" ").split(" ");
+            let placeHolderSet = new Set(newPlain.join("").split(""));
+            const charList = [...placeHolderSet];
+            if (charList.length > 10){
+                numOfSolutions.innerText = "Too many characters!"
+            }
+
+            let numCharPair = {}
+            const nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+            for (let i = 0; i < 10; i++){
+                numCharPair = {};
+                for (let k = 0; k < charList.length; k++){
+                    numCharPair[charList[k]] = nums[k];
+                }
+            }
+        }
+
+        solDiv.appendChild(numOfSolutions);
+        solDiv.appendChild(checkSolutions);
+        solDiv.style.display = "flex";
+        solDiv.style.alignItems = "center";
+        solDiv.style.justifyContent = "space-between";
+        solDiv.style.padding = "10px";
+
+        crPanel.appendChild(solDiv);
     }
 
 }
@@ -693,6 +729,14 @@ function encrypt(){
                     ciphertext += plaintext[i];
                 }
                 
+            }
+        } 
+        else if (question.innerText === "Cryptarithm"){              //CRYPTARITHMS
+            let newPlain = plaintext.split("=").join("").split("+").join("").split(" ");
+            let placeHolderSet = new Set(newPlain.split(""));
+            const charList = [...placeHolderSet];
+            if (charList.length > 10){
+                question.childNodes[4].childNodes[0].innerText = "Too many characters!"
             }
         }
         listOfEncrypted.push(ciphertext);
