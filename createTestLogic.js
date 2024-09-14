@@ -565,7 +565,9 @@ function createCryptographyQuestion(){
                             const v = Object.values(charMap);
                             map.innerText = k.join(",") + " maps to " + v.join(",");
                         }else{
-                            map.innerText = "";
+                            const k = Object.keys(charMap);
+                            const v = Object.values(charMap);
+                            map.innerText = "One solution: " + k.join(",") + " maps to " + v.join(",");
                         }
                         return true;
                     }
@@ -875,7 +877,7 @@ function codeBustersColumn(text, x, y, type, rectWidth = 8, rectHeight = 8, ) {
     const turnOnBoxesOption = document.getElementById('turnOnBoxesOption');
     const isBoxOn = turnOnBoxesOption.checked;
 
-    const docsThatDontNeed = ["Morse", "Morbit", "Pollux", ]
+    const docsThatDontNeed = ["Morse", "Morbit", "Pollux", "Cryptarithm"]
 
     
     doc.setFontSize(15);

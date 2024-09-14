@@ -823,6 +823,10 @@ input[type="search"]{
     font-family: "Montserrat", sans-serif;
 }
 
+.checkSolutions:active{
+    opacity: 0.8;
+}
+
 .optionDivForCipher{
     display: flex;
     justify-content: center;
