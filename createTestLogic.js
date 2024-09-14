@@ -849,6 +849,8 @@ function createPDFCypher(answers){
         if (ptsVal === ""){
             ptsVal = 0;
         }
+        doc.setFontSize(12)
+        doc.setFont("Times", "normal");
         if (panel.childNodes[3].childNodes[0].value !== "" || globalHint !== ""){
             addTextToPDF(questionCount.toString() + ".  [" + ptsVal + " points] Solve this " + panel.childNodes[0].innerText + " cipher. Hint: " + panel.childNodes[3].childNodes[0].value + " " + globalHint, 10);
             globalHint = "";
