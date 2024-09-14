@@ -526,30 +526,108 @@ function createCryptographyQuestion(){
     }else if (cipherContainer.value === "Cryptarithm"){
         crQuestionInput.placeholder = "Add equation like shirt + tshirt = clothes"
         const checkSolutions = document.createElement("button");
-        
+        checkSolutions.classList.add("checkSolutions");
 
         const numOfSolutions = document.createElement("div");
         const solDiv = document.createElement("div");
         checkSolutions.innerText = "Check for solutions";
         numOfSolutions.innerText = "0 Solutions";
 
-        checkSolutions.onclick = () => {
-            let newPlain = crQuestionInput.value.split(" + ").join(" ").split(" = ").join(" ").split(" ");
-            let placeHolderSet = new Set(newPlain.join("").split(""));
-            const charList = [...placeHolderSet];
-            if (charList.length > 10){
-                numOfSolutions.innerText = "Too many characters!"
-            }
+        const map = document.createElement("div");
 
-            let numCharPair = {}
-            const nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-            for (let i = 0; i < 10; i++){
-                numCharPair = {};
-                for (let k = 0; k < charList.length; k++){
-                    numCharPair[charList[k]] = nums[k];
-                }
+        checkSolutions.onclick = () => {
+            numOfSolutions.innerText = "Looking for solutions..."
+            let uniqueChars = new Set();
+            const plaintext = crQuestionInput.value.toLowerCase();
+            const words = plaintext.split(" = ").join(" ").split(" + ").join(" ").split(" ");
+            const result = words.pop(0); // Get the result part
+            // Collect all unique characters from words and result
+            words.forEach(word => word.split('').forEach(char => uniqueChars.add(char)));
+            result.split('').forEach(char => uniqueChars.add(char));
+        
+            uniqueChars = [...uniqueChars];
+            if (uniqueChars.length > 10) {
+                numOfSolutions.innerText = "Too many characters";
+                return;
             }
-        }
+        
+            let charMap = {};
+            let usedDigits = new Array(10).fill(false);
+            let solutionCount = 0; // To count how many solutions there are
+        
+            // Recursive backtracking function to try different digit assignments
+            function backtrack(index) {
+                if (index === uniqueChars.length) {
+                    if (checkCryptarithm(words, result, charMap)) {
+                        solutionCount++;
+                        if (solutionCount === 1) {
+                            const k = Object.keys(charMap);
+                            const v = Object.values(charMap);
+                            map.innerText = k.join(",") + " maps to " + v.join(",");
+                        }else{
+                            map.innerText = "";
+                        }
+                        return true;
+                    }
+                    return false;
+                }
+        
+                // Try assigning digits 0-9 to characters
+                let foundSolution = false;
+                for (let digit = 0; digit < 10; digit++) {
+                    // Check if digit is already used or if first letter of any word is assigned 0
+                    if (!usedDigits[digit]) {
+                        charMap[uniqueChars[index]] = digit;
+                        usedDigits[digit] = true;
+        
+                        // Ensure first letter of any word or result can't be 0
+                        if (digit === 0 && (isFirstLetter(uniqueChars[index], words, result))) {
+                            usedDigits[digit] = false;
+                            continue;
+                        }
+        
+                        foundSolution = backtrack(index + 1) || foundSolution;
+        
+                        // Backtrack
+                        usedDigits[digit] = false;
+                        delete charMap[uniqueChars[index]];
+                    }
+                }
+                return foundSolution;
+            }
+        
+            if (backtrack(0)) {
+                numOfSolutions.innerText = solutionCount === 1 ? `One solution found!` : `${solutionCount} solutions found!`;
+            } else {
+                numOfSolutions.innerText = "No solution found";
+                map.innerText = "";
+            }
+        
+            // Check if the current character-to-number mapping is valid for the cryptarithm
+            function checkCryptarithm(words, result, charMap) {
+                function wordToNumber(word) {
+                    let num = 0;
+                    for (const char of word) {
+                        num = num * 10 + charMap[char];
+                    }
+                    return num;
+                }
+        
+                const sum = words.reduce((acc, word) => acc + wordToNumber(word), 0);
+                const resultValue = wordToNumber(result);
+        
+                return sum === resultValue;
+            }
+        
+            // Function to check if a character is the first letter of any word or result
+            function isFirstLetter(char, words, result) {
+                for (const word of words) {
+                    if (word[0] === char) return true;
+                }
+                return result[0] === char;
+            }
+        };
+        
 
         solDiv.appendChild(numOfSolutions);
         solDiv.appendChild(checkSolutions);
@@ -559,6 +637,7 @@ function createCryptographyQuestion(){
         solDiv.style.padding = "10px";
 
         crPanel.appendChild(solDiv);
+        crPanel.appendChild(map);
     }
 
 }
@@ -732,12 +811,7 @@ function encrypt(){
             }
         } 
         else if (question.innerText === "Cryptarithm"){              //CRYPTARITHMS
-            let newPlain = plaintext.split("=").join("").split("+").join("").split(" ");
-            let placeHolderSet = new Set(newPlain.split(""));
-            const charList = [...placeHolderSet];
-            if (charList.length > 10){
-                question.childNodes[4].childNodes[0].innerText = "Too many characters!"
-            }
+            ciphertext = plaintext;
         }
         listOfEncrypted.push(ciphertext);
     });
