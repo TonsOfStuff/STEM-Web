@@ -1128,24 +1128,37 @@ function codeBustersColumn(text, x, y, type, rectWidth = 8, rectHeight = 8, ) {
         rectWidth -= 2;
 
         doc.setFont("Times", "bold");
+        x += rectWidth;
+        for (let i = 0; i<5; i++){ //Generating top labels for #s
+            doc.rect(x, y, rectWidth, rectHeight);
+            x += rectWidth;
 
 
-        for (let i = 0; i < 25; i++) {
-            if (i % 5 === 0){
+            xText = x - doc.getTextWidth((i + 1).toString()) * 2 - 0.3;
+            yText = y + doc.getTextWidth((i + 1).toString()) * 2 + 0.3;
+            doc.setFont("Times", "bold");
+            doc.text((i + 1).toString().toUpperCase(), xText, yText);
+        }
+
+        for (let i = 0; i < 30; i++) {
+            if (i % 6 === 0){
                 y += rectHeight;
                 yOffset += rectHeight;
 
                 x = leftMargin;
+
+                xText = x + doc.getTextWidth("1") + 0.2;
+                yText = y + doc.getTextWidth("1") * 2 + 0.5;
+                doc.setFont("Times", "bold");
+                doc.text((Math.floor(i / 6 + 1)).toString().toUpperCase(), xText, yText);
             }
 
             doc.rect(x, y, rectWidth, rectHeight);
-
-            
-
+        
             x += rectWidth;
         }
 
-        yOffset += 40;
+        yOffset += 50;
 
         doc.setFontSize(15);
     }
