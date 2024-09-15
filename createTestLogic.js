@@ -640,6 +640,11 @@ function createCryptographyQuestion(){
 
         crPanel.appendChild(solDiv);
         crPanel.appendChild(map);
+    }else if (cipherContainer.value === "Nihilist"){
+        const keyword = document.createElement("input");
+        keyword.placeholder = "Enter keyword";
+
+        crPanel.appendChild(keyword);
     }
 
 }
@@ -814,6 +819,15 @@ function encrypt(){
         } 
         else if (question.innerText === "Cryptarithm"){              //CRYPTARITHMS
             ciphertext = plaintext;
+        }
+        else if (question.innerText === "Nihilist"){        //NIHILIST
+            const alpha = [...a];
+            const keyword = question.parentElement.childNodes[4].value;
+            if (keyword === ""){
+                keyword = "keyword";
+            }
+             
+            
         }
         listOfEncrypted.push(ciphertext);
     });
