@@ -646,6 +646,9 @@ function createCryptographyQuestion(){
         const keywordTwo = document.createElement("input");
         keywordTwo.placeholder = "Enter 2nd keyword";
 
+        keyword.classList.add("shiftInput");
+        keywordTwo.classList.add("shiftInput");
+
         crPanel.appendChild(keyword);
         crPanel.appendChild(keywordTwo);
     }
@@ -823,12 +826,19 @@ function encrypt(){
         else if (question.innerText === "Cryptarithm"){              //CRYPTARITHMS
             ciphertext = plaintext;
         }
-        else if (question.innerText === "Nihilist"){        //NIHILIST
+        else if (question.innerText === "Nihilist"){                //NIHILIST
+            globalHint = "Last word is"
+
+
             let alpha = [...a];
             alpha.splice(9,1);
             let keyword = question.parentElement.childNodes[4].value.toLowerCase();
+            let keywordT = question.parentElement.childNodes[5].value.toLowerCase();
             if (keyword === ""){
                 keyword = "keyword";
+            }
+            if (keywordT === ""){
+                keywordT = "keyword";
             }
             let arr = keyword.split("").map(item => item.trim())
             const chars = new Set(arr);
@@ -843,17 +853,45 @@ function encrypt(){
                 }
             });
             alpha = newChars.concat(alpha);
-            plaintext = plaintext.split(" ").map(item => item.trim());
+            let newPlain = plaintext.split("").map(item => item.trim());
+            let keywordCipheredNum = [];
+            let keywordTCipheredNum = [];
+            newPlain.forEach(char => {
+                if (char === "j"){ //Check if char is J or not bc I and J are the same
+                    char = "i";
+                }
+                if (alpha.includes(char)){
+                    keywordCipheredNum.push(Math.ceil((alpha.indexOf(char) + 1) / 5).toString() + ((alpha.indexOf(char) % 5) + 1).toString());
+                }
+            });
+            arr = keywordT.split("").map(item => item.trim())
+            const charsTwo = new Set(arr);
+            charsTwo.forEach(char => {
+                if (char === "j"){
+                    char = "i";
+                }
+                if (alpha.includes(char)){
+                    keywordTCipheredNum.push(Math.ceil((alpha.indexOf(char) + 1) / 5).toString() + ((alpha.indexOf(char) % 5) + 1).toString())
+                }
+            });
+            result = [];
+            //Add up both keyword1 list and keyword2 list
+            let keywordTPointer = 0;
+            keywordCipheredNum.forEach(int => {
+                result.push((parseInt(int) + parseInt(keywordTCipheredNum[keywordTPointer])) % 100);
+                keywordTPointer += 1;
+                if (keywordTPointer > keywordTCipheredNum.length - 1){
+                    keywordTPointer = 0;
+                }
+            })
 
-            
-
-            console.log(alpha);
+            ciphertext = result.join(" ");
             
         }
         listOfEncrypted.push(ciphertext);
     });
 
-    //createPDFCypher(listOfEncrypted)
+    createPDFCypher(listOfEncrypted)
 }
 
 
