@@ -824,23 +824,36 @@ function encrypt(){
             ciphertext = plaintext;
         }
         else if (question.innerText === "Nihilist"){        //NIHILIST
-            const alpha = [...a];
-            const keyword = question.parentElement.childNodes[4].value;
+            let alpha = [...a];
+            alpha.splice(9,1);
+            let keyword = question.parentElement.childNodes[4].value.toLowerCase();
             if (keyword === ""){
                 keyword = "keyword";
             }
-            const chars = new Set(keyword.split(""));
+            let arr = keyword.split("").map(item => item.trim())
+            const chars = new Set(arr);
+            let newChars = [];
             chars.forEach(char => {
-                if (indexOf(char) !== -1){
-                    
+                if (alpha.indexOf(char) !== -1 || char === "j"){
+                    if (char === "j"){
+                        char = "i";
+                    }
+                    alpha.splice(alpha.indexOf(char), 1);
+                    newChars.push(char);
                 }
             });
+            alpha = newChars.concat(alpha);
+            plaintext = plaintext.split(" ").map(item => item.trim());
+
+            
+
+            console.log(alpha);
             
         }
         listOfEncrypted.push(ciphertext);
     });
 
-    createPDFCypher(listOfEncrypted)
+    //createPDFCypher(listOfEncrypted)
 }
 
 
