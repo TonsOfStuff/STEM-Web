@@ -827,7 +827,7 @@ function encrypt(){
             ciphertext = plaintext;
         }
         else if (question.innerText === "Nihilist"){                //NIHILIST
-            globalHint = "Last word is"
+            
 
 
             let alpha = [...a];
@@ -840,6 +840,9 @@ function encrypt(){
             if (keywordT === ""){
                 keywordT = "keyword";
             }
+            globalHint = "One of the keywords is " + keyword;
+
+
             let arr = keyword.split("").map(item => item.trim())
             const chars = new Set(arr);
             let newChars = [];
@@ -952,7 +955,7 @@ function codeBustersColumn(text, x, y, type, rectWidth = 8, rectHeight = 8, ) {
     const turnOnBoxesOption = document.getElementById('turnOnBoxesOption');
     const isBoxOn = turnOnBoxesOption.checked;
 
-    const docsThatDontNeed = ["Morse", "Morbit", "Pollux", "Cryptarithm"]
+    const docsThatDontNeed = ["Morse", "Morbit", "Pollux", "Cryptarithm", "Nihilist"]
 
     
     doc.setFontSize(15);
@@ -1118,6 +1121,33 @@ function codeBustersColumn(text, x, y, type, rectWidth = 8, rectHeight = 8, ) {
 
         doc.setFontSize(15);
         
+    }
+    if (type === "Nihilist"){
+        doc.setFontSize(10);
+        rectHeight -= 2;
+        rectWidth -= 2;
+
+        doc.setFont("Times", "bold");
+
+
+        for (let i = 0; i < 25; i++) {
+            if (i % 5 === 0){
+                y += rectHeight;
+                yOffset += rectHeight;
+
+                x = leftMargin;
+            }
+
+            doc.rect(x, y, rectWidth, rectHeight);
+
+            
+
+            x += rectWidth;
+        }
+
+        yOffset += 40;
+
+        doc.setFontSize(15);
     }
 
 }
