@@ -642,9 +642,12 @@ function createCryptographyQuestion(){
         crPanel.appendChild(map);
     }else if (cipherContainer.value === "Nihilist"){
         const keyword = document.createElement("input");
-        keyword.placeholder = "Enter keyword";
+        keyword.placeholder = "Enter 1st keyword";
+        const keywordTwo = document.createElement("input");
+        keywordTwo.placeholder = "Enter 2nd keyword";
 
         crPanel.appendChild(keyword);
+        crPanel.appendChild(keywordTwo);
     }
 
 }
@@ -826,7 +829,12 @@ function encrypt(){
             if (keyword === ""){
                 keyword = "keyword";
             }
-             
+            const chars = new Set(keyword.split(""));
+            chars.forEach(char => {
+                if (indexOf(char) !== -1){
+                    
+                }
+            });
             
         }
         listOfEncrypted.push(ciphertext);
