@@ -56,7 +56,8 @@ const questionBank = `{
             "questions": {
                 "What type of material is concrete?": "composite",
                 "What are polymers made up of": "Monomers",
-                "In a NaCl crystal structure, what is the difference between the coordination numbers of Na+ ions and Cl- ions": [["0", "1", "-1", "-2"], "0"]
+                "In a NaCl crystal structure, what is the difference between the coordination numbers of Na+ ions and Cl- ions": [["0", "1", "-1", "-2"], "0"],
+                "Ceramics are...": [["Organic compounds", "Inorganic compounds", "Elastic compounds", "Non-brittle compounds"], "Inorganic compounds"]
             },
             "about": {
                 "about": "This is about material science"
