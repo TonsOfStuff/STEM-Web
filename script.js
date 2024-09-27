@@ -60,7 +60,7 @@ const questionBank = `{
                 "Ceramics are...": [["Organic compounds", "Inorganic compounds", "Elastic compounds", "Non-brittle compounds"], "Inorganic compounds"]
             },
             "about": {
-                "about": "This is about material science"
+                "about": "This is about material science, a topic about the chemistry of the things in our world like wood, brick, metal, etc."
             }
         },
         "Astronomy": {
