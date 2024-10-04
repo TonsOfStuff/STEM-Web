@@ -67,7 +67,8 @@ const questionBank = `{
             "questions": {
                 "What element is most abundant in stars?": "Hydrogen",
                 "What is the B-V index of a star with B = 3 and V = 2": "1",
-                "{https://useruploads.socratic.org/fiSP0m0ARcuU0oeaTZun_hr_diagram.jpg}What diagram is this?": [["HR Diagram", "Star Spectrograph", "Stellar Isochrone", "Spectral Visualizer"], "HR Diagram"]
+                "{https://useruploads.socratic.org/fiSP0m0ARcuU0oeaTZun_hr_diagram.jpg}What diagram is this?": [["HR Diagram", "Star Spectrograph", "Stellar Isochrone", "Spectral Visualizer"], "HR Diagram"],
+                "Which star is more luminous? Star A with an absolute magnitude of -3 or Star B with an absolute magnitude of 1? (Answer with just a letter)": "A" 
             },
             "about": {
                 "about": "This is about astronomy"
