@@ -108,7 +108,8 @@ const questionBank = `{
             "questions": {
                 "Que es rana en ingles?": "Frog",
                 "Que es sin embargo en ingles?": "However",
-                "Estar conjugated into the preterite yo form?": "Estuve"
+                "Estar conjugated into the preterite yo form?": "Estuve",
+                "Que es tranquilo en ingles?": "Calm"
             },
             "about": {
                 "about": "This is about spanish"
