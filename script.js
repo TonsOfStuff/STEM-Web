@@ -181,6 +181,16 @@ const questionBank = `{
             "about": {
                 "about": "Fermi Questions tackles questions that do not have an exact answer but instead can be estimated. Questions like how many atoms are there on Earth is impossible to get an exact amount, but using existing knowledge, building up an estimation isn't hard. Fermi questions requires users to answer in terms of powers. For example, if your answer is 10^6 or a million, you just put 6. Make sure to round!"
             }
+        },
+        "Computer Science": {
+            "questions": {
+                "What is the data structure that points to places in memories in chain?": [["Linked List", "Binary Tree", "B-Tree", "Hash Table"], "Linked List"],
+                "What is the benefit of a hash table compared to something else?": [["O(1) time", "O(1) memory", "Accuracy", "Convenience"], "O(1) time"],
+                "What is the purpose of Big O Notation?": [["Measure effeciency", "Measure accuracy", "Rank algorithms", "Measure popularity"], "Measure effeciency"]
+            },
+            "about": {
+                "about": "Computer Science is a field exploring the world of computers and how they operate behind the scenes as well as how we can make computers faster. Learning algorithms and data structures is a great way to ease yourself into the world of computer science!"
+            }
         }
     }
 }`
