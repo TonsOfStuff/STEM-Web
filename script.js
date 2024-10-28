@@ -109,7 +109,8 @@ const questionBank = `{
                 "Que es rana en ingles?": "Frog",
                 "Que es sin embargo en ingles?": "However",
                 "Estar conjugated into the preterite yo form?": "Estuve",
-                "Que es tranquilo en ingles?": "Calm"
+                "Que es tranquilo en ingles?": "Calm",
+                "___ mesa frente a mí": [["Este", "Ese", "Esta", "Aquel"], "Este"]
             },
             "about": {
                 "about": "This is about spanish"
@@ -155,7 +156,8 @@ const questionBank = `{
         },
         "English": {
             "questions": {
-                "What does exacerbate mean?": [["Make worse", "Make better", "Reduce to", "Destroy"], "Make worse"]
+                "What does exacerbate mean?": [["Make worse", "Make better", "Reduce to", "Destroy"], "Make worse"],
+
             },
             "about": {
                 "about": "About <a href=https://en.wikipedia.org/wiki/English_language>English</a>, a language spoken around the world. English is sometimes known as the one of the most difficult languages to master with many grammer rules, words, and exceptions.                      <br><br>Subtopics: <ul>[SAT English](SAT English)</ul>"
@@ -167,7 +169,7 @@ const questionBank = `{
                 "What does recant mean?": [["Take something back", "Assert something", "Prove something", "To canel something"], "Take something back"]
             },
             "about": {
-                "about": "Subsection of [English](English). This topic specifically tackles SAT vocabulary and English grammer rules."
+                "about": "A subsection of [English](English). This topic specifically tackles SAT vocabulary and English grammer rules."
             }
         },
         "Fermi Questions": {
@@ -176,7 +178,9 @@ const questionBank = `{
                 "How many trees are there on Earth?": "12",
                 "How many atoms of socrates breath are there left?": "1",
                 "30^21": "31",
-                "How many times does the average person blink in a year?": "7"
+                "How many times does the average person blink in a year?": "7",
+                "How many seconds are in a century?": "9",
+                "How many days are in a century": "4"
             },
             "about": {
                 "about": "Fermi Questions tackles questions that do not have an exact answer but instead can be estimated. Questions like how many atoms are there on Earth is impossible to get an exact amount, but using existing knowledge, building up an estimation isn't hard. Fermi questions requires users to answer in terms of powers. For example, if your answer is 10^6 or a million, you just put 6. Make sure to round!"
