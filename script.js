@@ -98,7 +98,8 @@ const questionBank = `{
         "History": {
             "questions": {
                 "When did WWII end?": "1945",
-                "What is the last name of the US' 16th president?": "Lincoln"
+                "What is the last name of the US' 16th president?": "Lincoln",
+                "How many Missouri Compromises were there?": "2"
             },
             "about": {
                 "about": "This is about history"
