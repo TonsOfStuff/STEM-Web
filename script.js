@@ -157,7 +157,7 @@ const questionBank = `{
         },
         "English": {
             "questions": {
-                "What does exacerbate mean?": [["Make worse", "Make better", "Reduce to", "Destroy"], "Make worse"],
+                "What does exacerbate mean?": [["Make worse", "Make better", "Reduce to", "Destroy"], "Make worse"]
 
             },
             "about": {
